@@ -22,7 +22,7 @@
             <a class="nav-link" href="{{route("home")}}">Home </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Link-1</a>
+            <a class="nav-link" href="{{route("person")}}">Person</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Link-2</a>
@@ -30,7 +30,6 @@
         </ul>
       </nav>
     </header>
-
     @yield('content')
   </body>
 </html>
