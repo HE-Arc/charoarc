@@ -22,3 +22,6 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name("home");
 
 Route::get('/person', [PersonController::class, 'index'])->name("person");
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
