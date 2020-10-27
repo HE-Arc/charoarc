@@ -24,6 +24,12 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route("person")}}">Person</a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="{{route("login")}}">login</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="{{route("register")}}">register</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Link-2</a>
           </li>

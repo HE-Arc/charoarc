@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+
+             //custom
+            $table->string('gender', 20)->nullable();
+            $table->string('interessed_by', 20)->nullable();
         });
     }
 
