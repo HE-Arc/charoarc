@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +13,12 @@ use App\Http\Controllers\PersonController;
 |
 */
 
-
 Route::get('/', function () {
-    return redirect('home');
+    return view('welcome');
 });
-Route::get('/home', [HomeController::class, 'index'])->name("home");
 
-Route::get('/person', [PersonController::class, 'index'])->name("person");
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
