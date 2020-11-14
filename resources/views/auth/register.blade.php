@@ -46,6 +46,9 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}" style="padding-right:10%;">
+                        {{ __('All ready in ? Let\'s log you in !') }}
+            </a>
                 <x-button>
                     {{ __('Register') }}
                 </x-button>
