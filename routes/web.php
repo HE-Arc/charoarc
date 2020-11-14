@@ -22,6 +22,9 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name("home");
 
 Route::get('/person', [PersonController::class, 'index'])->name("person");
+//Route::get('user/{id}', [UserController::class, 'show']);
+Route::get('/profile',[PersonController::class, 'getPersonByName'])->name("profile");
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
