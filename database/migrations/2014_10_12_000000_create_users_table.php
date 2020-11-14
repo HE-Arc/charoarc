@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('age')->nullable();
             $table->string('gender')->nullable();
-            $table->string('interrestBy')->nullable();
+            $table->string('interessedBy')->nullable();
         });
     }
 
