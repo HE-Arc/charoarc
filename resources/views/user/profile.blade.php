@@ -4,52 +4,56 @@
             {{ __('Profile') }}
         </h2>
     </x-slot>
-
-
-   <div class="py-1">
+                            <!-- Change Name -->
+   <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
-                   <x-label> Name :  {{ $user->name }}  </x-label>
-                   <x-label> @php($toto = $user->getName())
-                   {{$toto}} <<<<<<
-                       </x-label>
-                        
                     
                     <form  method="post" enctype="multipart/form-data" 
-                        action="{{ route('updateMe', ['id' => $user->id, 'htmlName' => $inNameName ?? 'marchePas'])}}">
-                    @csrf
-                  
-                     <x-input id="inNameId" name="inNameName"  value="fuck">
-                    @csrf
-                    </x-input>
-
-                    <x-button> 
-                    Change
-                    </x-button>
+                        action="{{ route('updateMe', ['id' => $user->id, 'inName' => $inName ?? ''])}}">
+                        @csrf
+                        <x-label> Name :  {{ $user->name }}  </x-label>
+                        <x-input id="inName" name="inName" placeholder="Nickname" required/>
+                        <x-button>Change</x-button>
                     </form>
-                
-                    
+
                 </div>
             </div>
         </div>
     </div>
-
-    
-
-  <div class="py-1">
+                            <!-- Change Email -->
+    <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
-                    <p>Mail adresse :  {{ $user->email }} </p>
-                    New email: <x-input/>
-                    
+                    <form  method="post" enctype="multipart/form-data" 
+                        action="{{ route('updateMe', ['id' => $user->id, 'inEmail' => $inEmail ?? ''])}}">
+                        @csrf
+                        <x-label> Email :  {{ $user->email }}  </x-label>
+                        <x-input type="email" id="inEmail" name="inEmail" placeholder="your@email.ch" required/>
+                        <x-button>Change</x-button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-  
-
+                                <!-- Change Password -->
+    <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
+            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form  method="post" enctype="multipart/form-data" 
+                        action="{{ route('updateMe', ['id' => $user->id, 'inPassword' => $inConfirmePassword ?? '', 'inConfirmePassword' => $inConfirmePassword ?? ''])}}">
+                        @csrf
+                        <x-label> New password  </x-label>
+                        <x-input type="password" id="inPassword" name="inPassword" placeholder="New password" required/>
+                        <x-label> Confirme password  </x-label>
+                        <x-input type="password" id="inConfirmePassword" name="inConfirmePassword" placeholder="Confirme password" required/>
+                        <x-button>Change</x-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>
