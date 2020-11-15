@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,15 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+
+//ces deux ci sont fonctionnelles
+Route::get('/profile/{id}', [UserController::class, 'myprofile'])->name("myprofile");
+
+Route::post("/update", [UserController::class, 'updateMe'])->name("updateMe");
+
+
+//a retoucher aucun lien avec le probleme
+Route::get('/profile', [UserController::class, 'profile'])->name("profile");
 
 Route::get('/home', function () {
     return view('home');
