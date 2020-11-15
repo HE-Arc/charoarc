@@ -74,7 +74,6 @@ class User extends Authenticatable
 
         if($password === $confirmePassword)
         {
-            
             $user->password=Hash::make($password);
             $user->save();
         }

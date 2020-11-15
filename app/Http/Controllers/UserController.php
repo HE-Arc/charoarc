@@ -19,7 +19,6 @@
         
         public function update(Request $request)
         {    
-        
             $id = $request->input('id');        
             $user = User::getUserById($id);
 
@@ -43,7 +42,7 @@
             return redirect()->route('profile');
 
             //DEBUG PAGE -> use this and comment the redirection return
-            //return view('user.updateOK',["debugRequest"=>$request]);
+            //return view('user.debugPage',["debugRequest"=>$request]);
 
         } 
     }
