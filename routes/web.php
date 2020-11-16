@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('login');
 });
 
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth'])->name('home');
+Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
+Route::get('/profile', [UserController::class, 'profile'])->name("profile");
 
 require __DIR__.'/auth.php';
