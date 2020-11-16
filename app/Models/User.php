@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -59,8 +60,27 @@ class User extends Authenticatable
         $user = User::find($id);
         $user->name=$name;
         $user->save();
-        return $user;
+    }
+    public static function updateUserEmail($id, $email)
+    {
+        $user = User::find($id);
+        $user->email=$email;
+        $user->save();
+    }
+
+    public static function updateUserPassword($id, $password, $confirmePassword)
+    {
+        $user = User::find($id);
+
+        if($password === $confirmePassword)
+        {
+            $user->password=Hash::make($password);
+            $user->save();
+        }
     }  
+
+    
+
 
 
 //pour tester

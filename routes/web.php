@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 
 /*
@@ -17,21 +18,11 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('login');
 });
 
 
-//ces deux ci sont fonctionnelles
-Route::get('/profile/{id}', [UserController::class, 'myprofile'])->name("myprofile");
-
-Route::post("/update", [UserController::class, 'updateMe'])->name("updateMe");
-
-
-//a retoucher aucun lien avec le probleme
+Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
-
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth'])->name('home');
 
 require __DIR__.'/auth.php';
