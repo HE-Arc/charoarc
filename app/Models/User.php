@@ -86,10 +86,10 @@ class User extends Authenticatable
         $user->interessedBy=$interessedBy;
         $user->save();
     }
-    public static function updateUserAge($id, $age)
+    public static function updateUserBirthday($id, $birthday)
     {
         $user = User::find($id);
-        $user->age=$age;
+        $user->birthday=$birthday;
         $user->save();
     }
 

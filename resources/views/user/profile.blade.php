@@ -36,16 +36,16 @@
             </div>
         </div>
     </div>
-                        <!-- Change age -->
+                        <!-- Change birthday -->
       <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form  method="post" enctype="multipart/form-data" 
-                        action="{{ route('updateMe', ['id' => $user->id, 'inAge' => $inAge ?? ''])}}">
+                        action="{{ route('updateMe', ['id' => $user->id, 'inBirthday' => $inBirthday ?? ''])}}">
                         @csrf
-                        <x-label value=" Age : {{ $user->age }} ({{ $user->getAge($user->age)}} years old)"/>
-                        <x-input type="date"  min='{{ $user->getMaxAge()}}' max='{{ $user->getMinAge()}}' id="inAge" name="inAge" placeholder="11/11/1111" required/>                      
+                        <x-label value=" Birthday : {{ $user->birthday }} ({{ $user->getAge($user->birthday)}} years old)"/>
+                        <x-input type="date"  min='{{ $user->getMaxAge()}}' max='{{ $user->getMinAge()}}' id="inBirthday" name="inBirthday" placeholder="11/11/1111" required/>                      
                         <x-button>Change</x-button>
                     </form>
                 </div>
