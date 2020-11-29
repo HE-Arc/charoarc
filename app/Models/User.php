@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +14,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+
+    /**
+     * const
+     */
+    const MAX_AGE = 100;
+    const MIN_AGE = 18;
     /**
      * The attributes that are mass assignable.
      *
@@ -67,6 +74,24 @@ class User extends Authenticatable
         $user->email=$email;
         $user->save();
     }
+    public static function updateUserGender($id, $gender)
+    {
+        $user = User::find($id);
+        $user->gender=$gender;
+        $user->save();
+    }
+    public static function updateUserInteressedBy($id, $interessedBy)
+    {
+        $user = User::find($id);
+        $user->interessedBy=$interessedBy;
+        $user->save();
+    }
+    public static function updateUserAge($id, $age)
+    {
+        $user = User::find($id);
+        $user->age=$age;
+        $user->save();
+    }
 
     public static function updateUserPassword($id, $password, $confirmePassword)
     {
@@ -84,8 +109,22 @@ class User extends Authenticatable
 
 
 //pour tester
-    public function getName()
+    public static function getAge($age)
     {
-        return $this->name;
+        return Carbon::parse($age)->age;
     } 
+
+    public static function getMinAge()
+    {
+        $mutable = Carbon::now();
+        $mutable->sub(User::MIN_AGE, 'year');
+        return $mutable->toDateString();
+    }
+
+    public static function getMaxAge()
+    {
+        $mutable = Carbon::now();
+        $mutable->sub(User::MAX_AGE, 'year');
+        return $mutable->toDateString();
+    }
 }

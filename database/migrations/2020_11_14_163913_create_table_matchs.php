@@ -28,6 +28,6 @@ class CreateTableMatchs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_matchs');
+        Schema::dropIfExists('matchs');
     }
 }

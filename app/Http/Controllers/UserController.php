@@ -1,7 +1,6 @@
 <?php
     namespace App\Http\Controllers;
 
-
     use App\Models\User;
     use Illuminate\Http\Request;
     use Illuminate\Routing\Controller;
@@ -12,9 +11,13 @@
     {
         public function profile()
         {
-            $id=Auth::id();
-            $user = User::getUserById($id);
-            return view('user.profile', ["user"=>$user]);
+            if(Auth::check())
+            {
+                $id=Auth::id();
+                $user = User::getUserById($id);
+                return view('user.profile', ["user"=>$user]);
+            }
+            return redirect()->route('login');
         }
         
         public function update(Request $request)
@@ -27,10 +30,25 @@
                 $name = $request->input('inName');
                 User::updateUserName($id, $name);
             }
+            if ($request->has('inAge')) 
+            {
+                $age = $request->input('inAge');
+                User::updateUserAge($id, $age);
+            }
             if ($request->has('inEmail')) 
             {
                 $email = $request->input('inEmail');
                 User::updateUserEmail($id, $email);
+            }
+            if ($request->has('inGender')) 
+            {
+                $gender = $request->input('inGender');
+                User::updateUserGender($id, $gender);
+            }
+            if ($request->has('inInteressedBy')) 
+            {
+                $interessedBy = $request->input('inInteressedBy');
+                User::updateUserInteressedBy($id, $interessedBy);
             }
             if ($request->has('inPassword', 'inConfirmePassword')) 
             {
