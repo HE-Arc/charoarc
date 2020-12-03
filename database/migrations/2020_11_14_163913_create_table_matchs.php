@@ -15,8 +15,10 @@ class CreateTableMatchs extends Migration
     {
         Schema::create('matchs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger ('user_id1')->unsigned()->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
-            $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
+            $table->bigInteger ('user_id1')->unsigned()->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('status_user1')->nullable();
+            $table->boolean('status_user2')->nullable();
         });
 
     }
