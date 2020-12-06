@@ -21283,28 +21283,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/**
- * 
- * add popper.js
- * 
- * 
- */
-// new line #1
 
-
-/**
-    * We'll load jQuery and the Bootstrap jQuery plugin which provides support
-    * for JavaScript based Bootstrap features such as modals and tabs. This
-    * code may be modified to fit the specific needs of your application.
-    */
-
-try {
-  window.$ = window.jQuery = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'jquery'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // new line #2 and #3
-
-  window.Popper = !(function webpackMissingModule() { var e = new Error("Cannot find module 'popper.js/dist/umd/popper.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-
-  __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'bootstrap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-} catch (e) {}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
