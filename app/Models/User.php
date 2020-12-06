@@ -97,15 +97,11 @@ class User extends Authenticatable
         $user->birthday=$birthday;
         $user->save();
     }
-    public static function updateUserPassword($id, $password, $confirmePassword)
+    public static function updateUserPassword($id, $password)
     {
         $user = User::find($id);
-
-        if($password === $confirmePassword)
-        {
-            $user->password=Hash::make($password);
-            $user->save();
-        }
+        $user->password=Hash::make($password);
+        $user->save();
     }  
     public static function updateUserImage($id, $image)
     {

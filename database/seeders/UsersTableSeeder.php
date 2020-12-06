@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $arrayGender = ["woman", "man"];
-        for ($i = 0; $i <= 10; $i++) 
+        for ($i = 1; $i <= 10; $i++) 
         {
             $c=new User();
             $c->name = "user{$i}";

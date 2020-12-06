@@ -21,7 +21,6 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
 
