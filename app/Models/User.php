@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Image;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -62,6 +63,10 @@ class User extends Authenticatable
         return $user;
     }  
 
+
+    /**
+     * UPDATER
+     */
     public static function updateUserName($id, $name)
     {
         $user = User::find($id);
@@ -92,7 +97,6 @@ class User extends Authenticatable
         $user->birthday=$birthday;
         $user->save();
     }
-
     public static function updateUserPassword($id, $password, $confirmePassword)
     {
         $user = User::find($id);
@@ -103,12 +107,39 @@ class User extends Authenticatable
             $user->save();
         }
     }  
+    public static function updateUserImage($id, $image)
+    {
+        $user = User::find($id);
+        $user->image=$image;
+        $user->save();
+    }
+    /**
+     * Image managment
+     */
+    public static function transformeUserImage($image_file)
+    {
+        $image = Image::make($image_file);
+        //Response::make($image->encode('jpeg'));
+        return $image;
+    }
 
     
+    public static function fetchUserImage($id)
+    {
 
+        $user = User::find($id);
 
+        $image_file = Image::make($user->image);
+        $response = Response::make($image_file->encode('jpeg'));
+        $response->header('Content-Type', 'image/jpeg');
 
-//pour tester
+        return $response;
+    }
+
+    
+    /**
+     * Age managment
+     */
     public static function getAge($age)
     {
         return Carbon::parse($age)->age;

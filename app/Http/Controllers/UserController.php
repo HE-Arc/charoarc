@@ -2,6 +2,8 @@
     namespace App\Http\Controllers;
 
     use App\Models\User;
+    use Storage;
+    
     use Illuminate\Http\Request;
     use Illuminate\Routing\Controller;
     use Illuminate\Support\Facades\Auth;
@@ -19,10 +21,10 @@
             }
             return redirect()->route('login');
         }
-        
+
         public function update(Request $request)
         {    
-            $id = $request->input('id');        
+            $id = $request->input('id');
             $user = User::getUserById($id);
 
             if ($request->has('inName')) 
@@ -30,10 +32,10 @@
                 $name = $request->input('inName');
                 User::updateUserName($id, $name);
             }
-            if ($request->has('inAge')) 
+            if ($request->has('inBirthday')) 
             {
-                $age = $request->input('inAge');
-                User::updateUserAge($id, $age);
+                $age = $request->input('inBirthday');
+                User::updateUserBirthday($id, $birthday);
             }
             if ($request->has('inEmail')) 
             {
@@ -55,6 +57,15 @@
                 $password = $request->input('inPassword');
                 $confirmePassword = $request->input('inConfirmePassword');
                 User::updateUserPassword($id, $password, $confirmePassword);
+            }
+            if ($request->hasFile('inImage'))
+            {
+                $request->validate(['inImage' => 'required|image|max:2048']);
+                $path = $request->inImage->store('public');
+                $image = $request->inImage->hashName();
+
+                Storage::delete('public/'. $user->image);
+                User::updateUserImage($id, $image);
             }
         
             return redirect()->route('profile');

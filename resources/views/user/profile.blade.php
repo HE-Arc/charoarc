@@ -20,6 +20,39 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+                               <!-- Change Image -->
+   <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
+            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <form  method="post" enctype="multipart/form-data" 
+                        action="{{ route('updateMe', ['id' => $user->id, 'inImage' => $inImage ?? 'toto'])}}">
+                        @csrf
+                        <x-label> Image : </x-label>
+                        <img src="{{ asset( 'storage/' . $user->image ) }}" width="100" height="100">
+                        <x-input  type="file" id="inImage" name="inImage" />
+                        <x-button>Change</x-button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+
+
+
+
+
+
+
+
                              <!-- Change Email -->
     <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
