@@ -34,7 +34,7 @@
             }
             if ($request->has('inBirthday')) 
             {
-                $age = $request->input('inBirthday');
+                $birthday = $request->input('inBirthday');
                 User::updateUserBirthday($id, $birthday);
             }
             if ($request->has('inEmail')) 
