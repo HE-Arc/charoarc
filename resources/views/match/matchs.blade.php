@@ -13,18 +13,24 @@
         <td><button style=" float:right;background-color:green;">Like</button></td>
         </tr>
     </table>
-    <table class="py-2 " style="text-align:center;margin-left: auto;margin-right: auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
+    @if(!empty($userMatchs))
+    <table class="py-2 " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
         <tr style="border-bottom: 5px solid #5b596e;">
         <td>{{ __('Your Target') }}</td>
         <td>{{ __('Status') }}</td>
         </tr>
+       
         @foreach($userMatchs as $singleMatch)
-         <tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6" 
-         style="border-bottom: 2px solid #342f61;">
+         <tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
         <td>{{__( $singleMatch->getUserNameFromId())}}</td>
         <td>{{__($singleMatch->getMatchStatus())}}</td>
         </tr>
         @endforeach 
-    </table>     
+        
+    </table>
+    @else
+    <p class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6" 
+         style="border-bottom: 2px solid #342f61; text-align:center;margin:auto;width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">No matchs yet !</p>
+    @endif     
     </x-slot>
 </x-app-layout>
