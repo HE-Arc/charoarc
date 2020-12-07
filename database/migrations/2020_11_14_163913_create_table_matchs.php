@@ -17,8 +17,8 @@ class CreateTableMatchs extends Migration
             $table->id();
             $table->bigInteger ('user_id1')->unsigned()->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->boolean('status_user1')->nullable();
-            $table->boolean('status_user2')->nullable();
+            $table->boolean('status_user1');
+            $table->boolean('status_user2');
         });
 
     }
@@ -30,6 +30,6 @@ class CreateTableMatchs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_matchs');
+        Schema::dropIfExists('matchs');
     }
 }
