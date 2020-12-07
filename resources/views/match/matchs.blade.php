@@ -11,7 +11,7 @@
     </tr>
     @foreach($userMatchs as $singleMatch)
     <tr>
-    <td>{{__( $singleMatch->getName2())}}</td>
+    <td>{{__( $singleMatch->getUserNameFromId())}}</td>
     <td>{{__($singleMatch->getMatchStatus())}}</td>
     </tr>
     @endforeach 

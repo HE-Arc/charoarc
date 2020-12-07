@@ -24,14 +24,8 @@ class Match extends Model
         'status_user2'
     ];
 
-    private $name1;
-    private $name2;   
-
-    public function getName1(){
-        return $this->name1;
-    }
-    public function getName2(){
-        return $this->name2;
+    public function getUserNameFromId(){
+        return User::getUserById($this->user_id2)->name;
     }
 
     public static function allMatchs()
@@ -42,20 +36,15 @@ class Match extends Model
         return Match::find($id);
     }
     public static function getAllMatchByUser($userId){
-        $user = User::getUserById($userId);
         $allMatchs=Match::allMatchs();
         $stock=[];
         $var=0;
         foreach($allMatchs as $m){
             if($m->user_id1==$userId || $m->user_id2==$userId ){
-                $stock[$var++]=$m;
-                $m->name1=$user->name;
-                $m->name2=User::getUserById($m->user_id2)->name;
+                $stock[$var++]=$m;       
             }
         }
         return $stock;
-        
-        //return Match::where('user_id1'==$userId || 'user_id2'==$userId );
     }
     
     public  function getMatchStatus(){
