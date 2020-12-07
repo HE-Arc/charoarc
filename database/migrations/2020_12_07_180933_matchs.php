@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableMatchs extends Migration
+class Matchs extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,6 @@ class CreateTableMatchs extends Migration
             $table->boolean('status_user1');
             $table->boolean('status_user2');
         });
-
     }
 
     /**

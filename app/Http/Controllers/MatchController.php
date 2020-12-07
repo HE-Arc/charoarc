@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -18,11 +19,12 @@ class MatchController extends Controller
         if(Auth::check())
             {
                 $id=Auth::id();
-                $user = User::getUserById($id);
-                return view('match.matchs', ["user"=>$user]);
+                $userMatchs=Match::getAllMatchByUser($id);
+                return view('match.matchs', ["userMatchs"=>$userMatchs]);
             }
             return redirect()->route('login');
     }
+
 
     /**
      * Show the form for creating a new resource.

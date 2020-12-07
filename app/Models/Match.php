@@ -28,4 +28,22 @@ class Match extends Model
     public static function getMatchById($id){
         return Match::find($id);
     }
+    public static function getAllMatchByUser($userId){
+        $allMatchs=Match::allMatch();
+        $stock=[];
+        $var=0;
+        foreach($allMatchs as $m){
+            if($m->user_id1==$userId || $m->user_id1==$userId ){
+                $stock[$var++]=$m;
+            }
+        }
+        return $stock;
+    }
+    //return Match::where('user_id1'==$userId || 'user_id2'==$userId );
+    public  function getMatchStatus(){
+        if($this->status_user2==true)
+            return 'Match Validated';
+        return 'Pending Match';
+    } 
+
 }
