@@ -4,16 +4,14 @@
             {{ __('Matchs') }}
         </h2>
     </x-slot>
-    <table class="table">
+    <table class="table alignment:center">
     <tr>
     <td>{{ __('Your Target') }}</td>
     <td>{{ __('Status') }}</td>
     </tr>
-    
     @foreach($userMatchs as $singleMatch)
     <tr>
-    <td>{{ __('Je suis la') }}</td>   
-    <td>{{__($singleMatch->user_id2)}}</td>
+    <td>{{__( $singleMatch->getName2())}}</td>
     <td>{{__($singleMatch->getMatchStatus())}}</td>
     </tr>
     @endforeach 
