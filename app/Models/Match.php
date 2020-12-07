@@ -24,8 +24,11 @@ class Match extends Model
         'status_user2'
     ];
 
-    public function getUserNameFromId(){
-        return User::getUserById($this->user_id2)->name;
+    public function getUserNameFromId($userId){
+        if($userId==$this->user_id2)
+            return User::getUserById($this->user_id1)->name;
+        if($userId==$this->user_id1)
+            return User::getUserById($this->user_id2)->name;
     }
 
     public static function allMatchs()
