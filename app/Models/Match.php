@@ -31,6 +31,14 @@ class Match extends Model
             return User::getUserById($this->user_id2)->name;
     }
 
+    public  function getMatchStatus(){
+        if($this->status_user2==1)
+            return 'Match Validated';
+        return 'Pending Match';
+    } 
+
+    //static
+
     public static function allMatchs()
     {
         return Match::all();
@@ -49,11 +57,4 @@ class Match extends Model
         }
         return $stock;
     }
-    
-    public  function getMatchStatus(){
-        if($this->status_user2==1)
-            return 'Match Validated';
-        return 'Pending Match';
-    } 
-
 }
