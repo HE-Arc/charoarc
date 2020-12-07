@@ -16,8 +16,9 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
+    <div class="min-h-screen bg-gray-100">
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -31,6 +32,10 @@
             <main>
                 {{ $slot }}
             </main>
-        </div>
+        
     </body>
+    <footer style="text-align:center ;height:5%;">
+        <a href="https://www.he-arc.ch/ingenierie/bachelor-informatique-logicielle" target="_blank" >HEARC-Neuchâtel INF 3 DLM</a>
+    </footer>
+    </div>
 </html>

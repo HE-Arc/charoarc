@@ -12,18 +12,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
-                        {{ __('Profile') }}
+                    <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
+                        {{ __('Matchs !') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
-                        {{ __('Let\'s Match !') }}
-                    </x-nav-link>
-                </div>
-                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
-                        {{ __('Charo') }}
+                        {{ __('Profile') }}
                     </x-nav-link>
                 </div>
             </div>
