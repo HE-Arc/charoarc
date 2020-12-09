@@ -28,19 +28,32 @@ class MatchController extends Controller
                     if($m->user_id1==$id){
                         //cas on est user 1
                         if($m->status_user1 == false && $m->is_done==false){
-                            //on n'a pas encore voté on propose donc le match
-                            $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                            //on n'a pas encore voté on propose donc le match si respect regles
+                            $user2=User::getUserById($m->user_id2);
+                            if($userMe->gender== $user2->interessedBy && $user2->gender== $userMe->interessedBy){
+                                //on correspond
+                                $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                            }
+                            else{
+                                $m->is_done=true;
+                            }
                         }
                     }
                     else if($m->user_id2==$id){
                         //cas on est user 2
                         if($m->status_user2 == false && $m->is_done==false){
-                            //on n'a pas encore voté on propose donc le match
-                            $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                           //on n'a pas encore voté on propose donc le match si respect regles
+                           $user1=User::getUserById($m->user_id1);
+                           if($user1->gender== $userMe->interessedBy && $userMe->gender== $user1->interessedBy){
+                               //on correspond
+                               $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                           }
+                           else{
+                               $m->is_done=true;
+                           }
                         }
                     }
                 }
-
                 if($indexMatchsToAnswer>0){
                     //on peut avoir un match a répondre
                     //on choisit donc un match dans la liste
@@ -51,7 +64,7 @@ class MatchController extends Controller
                     $possibleMatchs=[];
                     $indexPossibleMatchs=0;
                     foreach(User::allUser() as $userTargeted){
-                        if($userMe->interessedBy == $userTargeted->gender && $userMe!=$userTargeted){
+                        if($userMe->interessedBy == $userTargeted->gender && $userMe!=$userTargeted && $userTargeted->interessedBy == $userMe->gender ){
                             $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
                         }
                     }
@@ -65,7 +78,6 @@ class MatchController extends Controller
                         $oneMatchToAnswer->is_done=false;
                         //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
                     }
-                    
                 }
                 //for debug ONLY TOBEREMOVED
                 if($oneMatchToAnswer!=null){
