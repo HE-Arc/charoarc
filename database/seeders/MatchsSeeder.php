@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Match;
-use Carbon\Carbon;
+
 
 class MatchsSeeder extends Seeder
 {
@@ -20,6 +20,7 @@ class MatchsSeeder extends Seeder
         $m->user_id2=2;
         $m->status_user1=true;
         $m->status_user2=true;
+        $m->is_done=false;
         $m->save();
 
         $m=new Match();
@@ -27,6 +28,7 @@ class MatchsSeeder extends Seeder
         $m->user_id2=3;
         $m->status_user1=true;
         $m->status_user2=false;
+        $m->is_done=false;
         $m->save();
     }
 }

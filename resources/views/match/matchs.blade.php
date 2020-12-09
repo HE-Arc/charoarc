@@ -10,7 +10,13 @@
         <td  style="width:75%;height:70%;margin:0 auto;">
         <img src="https://extranet1.utbm.fr/gpedago/javax.faces.resource/dynamiccontent.properties.xhtml?ln=primefaces&v=6.2&pfdrid=d625e40db5481f6ba1456d42729d2a12&pfdrt=sc&id=173960&pfdrid_c=true" alt="targer image">
         </td>
-        <td><button style=" float:right;background-color:green;">Like</button></td>
+            <td>
+                <form>
+                    <input type="hidden" value=''></input>
+                    <input type ="submit" value="Like" style=" float:right;background-color:green;" ></input>
+                </form>
+                    <!---<button style=" float:right;background-color:green;">Like</button>-->
+            </td>
         </tr>
     </table>
     @if(!empty($userMatchs))

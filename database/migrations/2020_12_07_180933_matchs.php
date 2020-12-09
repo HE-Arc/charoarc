@@ -19,6 +19,7 @@ class Matchs extends Migration
             $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('status_user1');
             $table->boolean('status_user2');
+            $table->boolean('is_done');
             $table->timestamps();
         });
     }
