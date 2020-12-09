@@ -20,7 +20,6 @@ Route::get('/', function () {
 });
 
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
-
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
 
