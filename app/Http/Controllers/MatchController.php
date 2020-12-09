@@ -100,10 +100,10 @@ class MatchController extends Controller
     }
 
     public function likeMatch(Request $request){
-        return redirect()->route('profile');
+        return redirect()->route('matchs');
     }
 
     public function dislikeMatch(Request $request){
-     
+        return redirect()->route('matchs');
     }
 }
