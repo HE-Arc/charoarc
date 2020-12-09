@@ -16,6 +16,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
+    if(Auth::check())
+        return redirect('matchs'); 
     return redirect('login');
 });
 

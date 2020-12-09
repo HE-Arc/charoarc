@@ -15,12 +15,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
-                        {{ __('Matchs !') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
-                        {{ __('Profile') }}
+                        {{ __('CharoArc') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -41,6 +36,16 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
+                                {{ __('CharoArc') }}
+                            </x-nav-link>
+                        </div>
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                                {{ __('Account') }}
+                            </x-nav-link>
+                        </div>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -50,6 +55,7 @@
                                                 this.closest('form').submit();">
                                 {{ __('Logout') }}
                             </x-dropdown-link>
+                            
                         </form>
                     </x-slot>
                 </x-dropdown>
@@ -68,18 +74,19 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
-                {{ __('Profile') }}
-            </x-responsive-nav-link>
-        </div>
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">    
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
-                {{ __('Matchs ! ') }}
+                {{ __('Home') }}
             </x-responsive-nav-link>
         </div>
-
+    
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                {{ __('Account') }}
+            </x-responsive-nav-link>
+        </div>
+        
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
