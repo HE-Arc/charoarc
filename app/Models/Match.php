@@ -34,8 +34,10 @@ class Match extends Model
     }
 
     public  function getMatchStatus(){
-        if($this->status_user2==1)
+        if($this->status_user2==1 && $this->status_user1==1)
             return 'Match Validated';
+        if($this->is_done==1 && ($this->status_user2==0 || $this->status_user1==0))
+            return 'Match Aborted';
         return 'Pending Match';
     } 
 
