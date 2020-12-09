@@ -22,5 +22,6 @@ Route::get('/', function () {
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
-
+Route::post("/matchs/like", [MatchController::class, 'likeMatch'])->name("likeMatch");
+Route::post("/matchs/dislike", [MatchController::class, 'dislikeMatch'])->name("dislikeMatch");
 require __DIR__.'/auth.php';

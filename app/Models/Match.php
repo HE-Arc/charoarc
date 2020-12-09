@@ -37,9 +37,7 @@ class Match extends Model
     }
 
     public function toBeDisplayed($currentUserId){
-        if(($currentUserId== $this->user_id1 && $this->status_user1 == true) || ( $currentUserId== $this->user_id2 && $this->status_user2 == true))
-            return true;
-        return false;
+        return(($currentUserId== $this->user_id1 && $this->status_user1 == true) || ( $currentUserId== $this->user_id2 && $this->status_user2 == true));
     }
 
     public function getTargetUserId($userId){
