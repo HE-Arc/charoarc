@@ -23,7 +23,7 @@ class MatchController extends Controller
                 $userMatchs=Match::getAllMatchByUser($id);
                 $matchsToAnswer=[];
                 $indexMatchsToAnswer=0;
-
+                $oneMatchToAnswer=null;
                 foreach($userMatchs as $m){
                     if($m->user_id1==$id){
                         //cas on est user 1
@@ -55,18 +55,24 @@ class MatchController extends Controller
                             $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
                         }
                     }
-                    $usrTemp=$possibleMatchs[random_int(0,$indexPossibleMatchs-1)];
-                    if($usrTemp!=null){
-                        $oneMatchToAnswer=new Match();
-                        $oneMatchToAnswer->user_id1=$id;
-                        $oneMatchToAnswer->user_id2=$usrTemp->id;
-                        $oneMatchToAnswer->status_user1=false;
-                        $oneMatchToAnswer->status_user2=false;
-                        $oneMatchToAnswer->is_done=false;
-                        //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
+                    if($indexPossibleMatchs>0){
+                        $usrTemp=$possibleMatchs[random_int(0,$indexPossibleMatchs-1)];
+                        if($usrTemp!=null){
+                            $oneMatchToAnswer=new Match();
+                            $oneMatchToAnswer->user_id1=$id;
+                            $oneMatchToAnswer->user_id2=$usrTemp->id;
+                            $oneMatchToAnswer->status_user1=false;
+                            $oneMatchToAnswer->status_user2=false;
+                            $oneMatchToAnswer->is_done=false;
+                            //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
+                        }
                     }
+                    
                 }
-                echo $oneMatchToAnswer->toString();
+                //for debug ONLY TOBEREMOVED
+                if($oneMatchToAnswer!=null){
+                    echo $oneMatchToAnswer->toString();
+                }
                 return view('match.matchs', ["userMatchs"=>$userMatchs,"proposedMatch"=>$oneMatchToAnswer]);
             }
             return redirect()->route('login');
