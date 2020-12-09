@@ -80,7 +80,7 @@ class MatchController extends Controller
                     }
                 }
                 //for debug ONLY TOBEREMOVED
-                if($oneMatchToAnswer!=null){
+                if($oneMatchToAnswer!=null && false){
                     echo $oneMatchToAnswer->toString();
                 }
                 return view('match.matchs', ["userMatchs"=>$userMatchs,"proposedMatch"=>$oneMatchToAnswer]);
@@ -100,6 +100,7 @@ class MatchController extends Controller
     }
 
     public function likeMatch(Request $request){
+        
         return redirect()->route('matchs');
     }
 
