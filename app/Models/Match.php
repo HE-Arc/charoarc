@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Match extends Model
 {
     use HasFactory;
@@ -26,11 +25,25 @@ class Match extends Model
         'is_done',
     ];
 
+    public function toString(){
+        return  'user_id1 : '.$this->user_id1.' user_id2 : '.$this->user_id2.' status_user1 : '.$this->status_user1.' status_user2 : '.$this->status_user2.' is_done : '.$this->is_done;
+    }
+
     public function getUserNameFromId($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1)->name;
         if($userId==$this->user_id1)
             return User::getUserById($this->user_id2)->name;
+    }
+
+    public function getTargetUserId($userId){
+        if($userId==$this->user_id2)
+            return $this->user_id1;
+        if($userId==$this->user_id1)
+            return $this->user_id2;
+    }
+    public function getUserImagebyId($userId){
+        return User::getUserById($userId)->image;
     }
 
     public  function getMatchStatus(){
@@ -61,4 +74,6 @@ class Match extends Model
         }
         return $stock;
     }
+
+
 }

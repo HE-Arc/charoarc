@@ -14,7 +14,11 @@
             <!-- <button  style=" float:left;background-color:red;">Dislike</button> -->
         </td>
         <td  style="width:75%;height:70%;margin:0 auto;">
-        <img src="https://extranet1.utbm.fr/gpedago/javax.faces.resource/dynamiccontent.properties.xhtml?ln=primefaces&v=6.2&pfdrid=d625e40db5481f6ba1456d42729d2a12&pfdrt=sc&id=173960&pfdrid_c=true" alt="targer image">
+        @if($proposedMatch !=null)
+            <img src="{{__(asset( 'storage/' . $proposedMatch->getUserImagebyId($proposedMatch->getTargetUserId(Auth::id()))))}}" alt="target image">
+        @else
+            <img src="https://github.com/HE-Arc/charoarc/wiki/images/default.png" alt="no targe then default message">
+        @endif
         </td>
             <td>
                 <form>

@@ -19,8 +19,55 @@ class MatchController extends Controller
         if(Auth::check())
             {
                 $id=Auth::id();
+                $userMe=User::getUserById($id);
                 $userMatchs=Match::getAllMatchByUser($id);
-                return view('match.matchs', ["userMatchs"=>$userMatchs]);
+                $matchsToAnswer=[];
+                $indexMatchsToAnswer=0;
+
+                foreach($userMatchs as $m){
+                    if($m->user_id1==$id){
+                        //cas on est user 1
+                        if($m->status_user1 == false && $m->is_done==false){
+                            //on n'a pas encore voté on propose donc le match
+                            $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                        }
+                    }
+                    else if($m->user_id2==$id){
+                        //cas on est user 2
+                        if($m->status_user2 == false && $m->is_done==false){
+                            //on n'a pas encore voté on propose donc le match
+                            $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                        }
+                    }
+                }
+
+                if($indexMatchsToAnswer>0){
+                    //on peut avoir un match a répondre
+                    //on choisit donc un match dans la liste
+                    $oneMatchToAnswer=$matchsToAnswer[random_int(0,$indexMatchsToAnswer-1)];
+                }
+                else{
+                    //pas de matchs, il faut proposer un nouveau
+                    $possibleMatchs=[];
+                    $indexPossibleMatchs=0;
+                    foreach(User::allUser() as $userTargeted){
+                        if($userMe->interessedBy == $userTargeted->gender){
+                            $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
+                        }
+                    }
+                    $usrTemp=$possibleMatchs[random_int(0,$indexPossibleMatchs-1)];
+                    if($usrTemp!=null){
+                        $oneMatchToAnswer=new Match();
+                        $oneMatchToAnswer->user_id1=$id;
+                        $oneMatchToAnswer->user_id2=$usrTemp->id;
+                        $oneMatchToAnswer->status_user1=false;
+                        $oneMatchToAnswer->status_user2=false;
+                        $oneMatchToAnswer->is_done=false;
+                        //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
+                    }
+                }
+                echo $oneMatchToAnswer->toString();
+                return view('match.matchs', ["userMatchs"=>$userMatchs,"proposedMatch"=>$oneMatchToAnswer]);
             }
             return redirect()->route('login');
     }
