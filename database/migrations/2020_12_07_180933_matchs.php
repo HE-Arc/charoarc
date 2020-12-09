@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableMatchs extends Migration
+class Matchs extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,12 @@ class CreateTableMatchs extends Migration
     {
         Schema::create('matchs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger ('user_id1')->unsigned()->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
-            $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
+            $table->bigInteger ('user_id1')->unsigned()->foreign('user_id1')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger ('user_id2')->unsigned()->foreign('user_id2')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->boolean('status_user1');
+            $table->boolean('status_user2');
+            $table->timestamps();
         });
-
     }
 
     /**
