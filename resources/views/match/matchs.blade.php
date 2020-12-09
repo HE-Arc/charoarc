@@ -17,8 +17,9 @@
         @if($proposedMatch !=null)
             <img src="{{__(asset( 'storage/' . $proposedMatch->getUserImagebyId($proposedMatch->getTargetUserId(Auth::id()))))}}" alt="target image">
         @else
-            <img src="https://github.com/HE-Arc/charoarc/wiki/images/default.png" alt="no targe then default message">
+            <img src="{{__(asset( 'storage/app/public/default.png'))}}" alt="no targe then default message">
         @endif
+        <!-- https://github.com/HE-Arc/charoarc/wiki/images/default.png -->
         </td>
             <td>
                 <form>
