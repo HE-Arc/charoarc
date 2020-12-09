@@ -37,9 +37,7 @@ class Match extends Model
     }
 
     public function toBeDisplayed($currentUserId){
-        if($currentUserId== $this->user_id1 && $this->status_user1 == true)
-            return true;
-        if($currentUserId== $this->user_id2 && $this->status_user2 == true)
+        if(($currentUserId== $this->user_id1 && $this->status_user1 == true) || ( $currentUserId== $this->user_id2 && $this->status_user2 == true))
             return true;
         return false;
     }
@@ -60,6 +58,7 @@ class Match extends Model
             return 'Match Validated';
         if($this->is_done==1 && ($this->status_user2==0 || $this->status_user1==0))
             return 'Match Aborted';
+        return 'Pending Match';
     } 
 
     //static
