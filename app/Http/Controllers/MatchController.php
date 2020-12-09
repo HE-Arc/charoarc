@@ -51,21 +51,19 @@ class MatchController extends Controller
                     $possibleMatchs=[];
                     $indexPossibleMatchs=0;
                     foreach(User::allUser() as $userTargeted){
-                        if($userMe->interessedBy == $userTargeted->gender){
+                        if($userMe->interessedBy == $userTargeted->gender && $userMe!=$userTargeted){
                             $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
                         }
                     }
                     if($indexPossibleMatchs>0){
                         $usrTemp=$possibleMatchs[random_int(0,$indexPossibleMatchs-1)];
-                        if($usrTemp!=null){
-                            $oneMatchToAnswer=new Match();
-                            $oneMatchToAnswer->user_id1=$id;
-                            $oneMatchToAnswer->user_id2=$usrTemp->id;
-                            $oneMatchToAnswer->status_user1=false;
-                            $oneMatchToAnswer->status_user2=false;
-                            $oneMatchToAnswer->is_done=false;
-                            //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
-                        }
+                        $oneMatchToAnswer=new Match();
+                        $oneMatchToAnswer->user_id1=$id;
+                        $oneMatchToAnswer->user_id2=$usrTemp->id;
+                        $oneMatchToAnswer->status_user1=false;
+                        $oneMatchToAnswer->status_user2=false;
+                        $oneMatchToAnswer->is_done=false;
+                        //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
                     }
                     
                 }

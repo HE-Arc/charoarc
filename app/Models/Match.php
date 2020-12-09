@@ -36,22 +36,30 @@ class Match extends Model
             return User::getUserById($this->user_id2)->name;
     }
 
+    public function toBeDisplayed($currentUserId){
+        if($currentUserId== $this->user_id1 && $this->status_user1 == true)
+            return true;
+        if($currentUserId== $this->user_id2 && $this->status_user2 == true)
+            return true;
+        return false;
+    }
+
     public function getTargetUserId($userId){
         if($userId==$this->user_id2)
             return $this->user_id1;
         if($userId==$this->user_id1)
             return $this->user_id2;
     }
+    
     public function getUserImagebyId($userId){
         return User::getUserById($userId)->image;
     }
 
-    public  function getMatchStatus(){
+    public  function getMatchTextStatus(){
         if($this->status_user2==1 && $this->status_user1==1)
             return 'Match Validated';
         if($this->is_done==1 && ($this->status_user2==0 || $this->status_user1==0))
             return 'Match Aborted';
-        return 'Pending Match';
     } 
 
     //static
