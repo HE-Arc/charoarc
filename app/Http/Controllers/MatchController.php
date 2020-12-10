@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -104,6 +106,7 @@ class MatchController extends Controller
             //les deux users ce sont prononcés
             $m->is_done=true;
         }
+        $m->save();
         return redirect()->route('matchs');
     }
 
@@ -125,6 +128,7 @@ class MatchController extends Controller
             //les deux users ce sont prononcés
             $m->is_done=true;
         }
+        $m->save();
         return redirect()->route('matchs');
     }
 }

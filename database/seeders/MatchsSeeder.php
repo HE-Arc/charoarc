@@ -19,8 +19,7 @@ class MatchsSeeder extends Seeder
         $m->user_id1=1;
         $m->user_id2=2;
         $m->status_user1=true;
-        $m->status_user2=true;
-        $m->is_done=true;
+        $m->is_done=false;
         $m->save();
 
         $m=new Match();
