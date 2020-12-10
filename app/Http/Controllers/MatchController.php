@@ -73,14 +73,13 @@ class MatchController extends Controller
                         $oneMatchToAnswer=new Match();
                         $oneMatchToAnswer->user_id1=$id;
                         $oneMatchToAnswer->user_id2=$usrTemp->id;
-                        $oneMatchToAnswer->status_user1=false;
-                        $oneMatchToAnswer->status_user2=false;
                         $oneMatchToAnswer->is_done=false;
                         //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
                     }
                 }
                 //for debug ONLY TOBEREMOVED
                 if($oneMatchToAnswer!=null && false){
+                    echo "<br><br><br><br>";
                     echo $oneMatchToAnswer->toString();
                 }
                 return view('match.matchs', ["userMatchs"=>$userMatchs,"proposedMatch"=>$oneMatchToAnswer]);
@@ -88,23 +87,44 @@ class MatchController extends Controller
             return redirect()->route('login');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function likeMatch(Request $request){
-        
+        $request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
+        $m = $request->input('proposedMatch');
+        $m->save();
+
+        if($m->user_id1==Auth::id()){
+            //on est user 1
+            $m->status_user1=true;
+        }
+        else{
+            //on est user 2
+            $m->status_user2=true;
+        }
+        if($m->status_user1 != null && $m->status_user2 != null){
+            //les deux users ce sont prononcés
+            $m->is_done=true;
+        }
         return redirect()->route('matchs');
     }
 
     public function dislikeMatch(Request $request){
+        $request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
+        $m = $request->input('proposedMatch');
+        echo "<br><br><br><br>";
+        echo $m->toString();
+        $m->save();
+        if($m->user_id1==Auth::id()){
+            //on est user 1
+            $m->status_user1=false;
+        }
+        else{
+            //on est user 2
+            $m->status_user2=false;
+        }
+        if($m->status_user1 != null && $m->status_user2 != null){
+            //les deux users ce sont prononcés
+            $m->is_done=true;
+        }
         return redirect()->route('matchs');
     }
 }

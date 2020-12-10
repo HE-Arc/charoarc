@@ -6,6 +6,7 @@
     <table class="py-2 " style="display:flex; justify-content:space-around;
     text-align:center;margin:auto;height:40%; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
         <tr>
+        @if($proposedMatch !=null)
         <td>
             <form method="POST" action="{{route('dislikeMatch')}}">
                 @csrf
@@ -13,6 +14,7 @@
                 <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
             </form>
         </td>
+        @endif
         <td  style="width:75%;height:70%;margin:0 auto;">
         @if($proposedMatch !=null)
             <img src="{{__(asset( 'storage/' . $proposedMatch->getUserImagebyId($proposedMatch->getTargetUserId(Auth::id()))))}}" alt="target image">
@@ -21,6 +23,7 @@
         @endif
         <!-- https://github.com/HE-Arc/charoarc/wiki/images/default.png -->
         </td>
+            @if($proposedMatch !=null)
             <td>
             <form method="POST" action="{{route('likeMatch')}}">
             @csrf
@@ -28,6 +31,7 @@
                     <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
                 </form>
             </td>
+            @endif
         </tr>
     </table>
     @if(!empty($userMatchs))
