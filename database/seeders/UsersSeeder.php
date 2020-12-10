@@ -29,6 +29,7 @@ class UsersSeeder extends Seeder
             $c->birthday=$tmpCarbonDate->toDateString();
             $c->gender=$arrayGender[rand(0,1)];
             $c->interessedBy=$arrayGender[rand(0,1)];
+            $c->image = "default.png";
             $c->save();
         }
     }
