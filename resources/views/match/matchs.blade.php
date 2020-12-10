@@ -10,7 +10,7 @@
         <td>
             <form method="POST" action="{{route('dislikeMatch')}}">
                 @csrf
-                <input type="hidden" value="{{$proposedMatch}}"></input>
+                {{ Form::hidden('invisibleLike', $proposedMatch) }}
                 <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
             </form>
         </td>
@@ -26,9 +26,9 @@
             @if($proposedMatch !=null)
             <td>
             <form method="POST" action="{{route('likeMatch')}}">
-            @csrf
-                <input type="hidden" value="{{$proposedMatch}}"></input>
-                    <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
+                @csrf
+                {{ Form::hidden('invisibleDislike', $proposedMatch) }}
+                <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
                 </form>
             </td>
             @endif

@@ -95,8 +95,8 @@ class MatchController extends Controller
             return redirect()->route('login');
     }
     public function likeMatch(Request $request){
-        //$request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
-        $temp =  $request->input('proposedMatch');
+        $request->validate(['match' => 'required|exists:App\Models\Match']);
+        $temp =  $request->input('match');
         $m=new Match();
         $m->user_id1=$temp->user_id1;
         $m->user_id1=$temp->user_id2;
