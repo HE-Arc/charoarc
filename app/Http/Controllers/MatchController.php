@@ -67,7 +67,13 @@ class MatchController extends Controller
                     $indexPossibleMatchs=0;
                     foreach(User::allUser() as $userTargeted){
                         if($userMe->interessedBy == $userTargeted->gender && $userMe!=$userTargeted && $userTargeted->interessedBy == $userMe->gender ){
-                            $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
+                            $bool=true;
+                            foreach(Match::getAllMatchByUser($id) as $m){
+                                if(($userTargeted->id==$m->user_id1 && $id==$m->user_id2) || ($userTargeted->id==$m->user_id2 && $id==$m->user_id1))
+                                    $bool = false;
+                            }
+                            if($bool)
+                                $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
                         }
                     }
                     if($indexPossibleMatchs>0){
@@ -77,10 +83,10 @@ class MatchController extends Controller
                         $oneMatchToAnswer->user_id2=$usrTemp->id;
                         $oneMatchToAnswer->is_done=false;
                         //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
-                    }
+                        }
                 }
                 //for debug ONLY TOBEREMOVED
-                if($oneMatchToAnswer!=null && false){
+                if($oneMatchToAnswer!=null && true){
                     echo "<br><br><br><br>";
                     echo $oneMatchToAnswer->toString();
                 }
@@ -88,11 +94,13 @@ class MatchController extends Controller
             }
             return redirect()->route('login');
     }
-
     public function likeMatch(Request $request){
-        $request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
-        $m = $request->input('proposedMatch');
-        $m->save();
+        //$request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
+        $temp =  $request->input('proposedMatch');
+        $m=new Match();
+        $m->user_id1=$temp->user_id1;
+        $m->user_id1=$temp->user_id2;
+        $m->is_done=false;
 
         if($m->user_id1==Auth::id()){
             //on est user 1
@@ -112,10 +120,12 @@ class MatchController extends Controller
 
     public function dislikeMatch(Request $request){
         $request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
-        $m = $request->input('proposedMatch');
-        echo "<br><br><br><br>";
-        echo $m->toString();
-        $m->save();
+        $temp = $request->input('proposedMatch');
+        $temp =  $request->input('proposedMatch');
+        $m=new Match();
+        $m->user_id1=$temp->user_id1;
+        $m->user_id1=$temp->user_id2;
+        $m->is_done=false;
         if($m->user_id1==Auth::id()){
             //on est user 1
             $m->status_user1=false;
