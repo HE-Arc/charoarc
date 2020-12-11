@@ -49,8 +49,12 @@ class Match extends Model
             return $this->user_id2;
     }
     
-    public function getUserImagebyId($userId){
-        return User::getUserById($userId)->image;
+    public function getTargetImage($userId){
+        if($userId==$this->user_id2)
+            return User::getUserById($this->user_id1);
+        if($userId==$this->user_id1)
+            return User::getUserById($this->user_id2);
+
     }
 
     public  function getMatchTextStatus(){

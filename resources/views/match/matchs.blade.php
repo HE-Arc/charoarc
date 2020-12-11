@@ -3,31 +3,28 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Matchs') }}
         </h2>
+    </x-slot>
+    <x-slot name="slot">
     <table class="py-2 " style="display:flex; justify-content:space-around;
     text-align:center;margin:auto;height:40%; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
         <tr>
-        @if($proposedMatch !=null)
+        @if($matchToAnswerId !=null || $newMatchUserId !=null)
         <td>
-            <form method="POST" action="{{route('dislikeMatch')}}">
+            <form method="POST" action="{{route('likeDislikeMatch')}}">
                 @csrf
-                {{ Form::hidden('invisibleLike', $proposedMatch) }}
+                {{ Form::hidden('invisibleLike', '[$matchToAnswerId,$newMatchUserId]') }}
                 <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
             </form>
         </td>
         @endif
         <td  style="width:75%;height:70%;margin:0 auto;">
-        @if($proposedMatch !=null)
-            <img src="{{__(asset( 'storage/' . $proposedMatch->getUserImagebyId($proposedMatch->getTargetUserId(Auth::id()))))}}" alt="target image">
-        @else
-            <img src="{{__(asset( 'storage/default.png'))}}" alt="no target then default message">
-        @endif
-        <!-- https://github.com/HE-Arc/charoarc/wiki/images/default.png -->
+            <img src="{{__(asset( 'storage/'. $image))}}" alt="target image">
         </td>
-            @if($proposedMatch !=null)
+            @if($matchToAnswerId !=null || $newMatchUserId !=null)
             <td>
-            <form method="POST" action="{{route('likeMatch')}}">
+            <form method="POST" action="{{route('likeDislikeMatch')}}">
                 @csrf
-                {{ Form::hidden('invisibleDislike', $proposedMatch) }}
+                {{ Form::hidden('invisibleDislike', '[$matchToAnswerId,$newMatchUserId]') }}
                 <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
                 </form>
             </td>

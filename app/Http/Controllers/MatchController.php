@@ -26,6 +26,7 @@ class MatchController extends Controller
                 $matchsToAnswer=[];
                 $indexMatchsToAnswer=0;
                 $oneMatchToAnswer=null;
+                $newMatchUserId=null;
                 foreach($userMatchs as $m){
                     if($m->user_id1==$id){
                         //cas on est user 1
@@ -63,7 +64,7 @@ class MatchController extends Controller
                 }
                 else{
                     //pas de matchs, il faut proposer un nouveau
-                    $possibleMatchs=[];
+                    $possibleUsersToMatchWith=[];
                     $indexPossibleMatchs=0;
                     foreach(User::allUser() as $userTargeted){
                         if($userMe->interessedBy == $userTargeted->gender && $userMe!=$userTargeted && $userTargeted->interessedBy == $userMe->gender ){
@@ -73,72 +74,43 @@ class MatchController extends Controller
                                     $bool = false;
                             }
                             if($bool)
-                                $possibleMatchs[$indexPossibleMatchs++]=$userTargeted;
+                                $possibleUsersToMatchWith[$indexPossibleMatchs++]=$userTargeted;
                         }
                     }
                     if($indexPossibleMatchs>0){
-                        $usrTemp=$possibleMatchs[random_int(0,$indexPossibleMatchs-1)];
-                        $oneMatchToAnswer=new Match();
-                        $oneMatchToAnswer->user_id1=$id;
-                        $oneMatchToAnswer->user_id2=$usrTemp->id;
-                        $oneMatchToAnswer->is_done=false;
+                        $newMatchUserId=$possibleUsersToMatchWith[random_int(0,$indexPossibleMatchs-1)]->id;
+                        // $oneMatchToAnswer->user_id1=$id;
+                        // $oneMatchToAnswer->user_id2=$usrTemp->id;
+                        // $oneMatchToAnswer->is_done=false;
                         //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
                         }
                 }
+             
+                $image='default.png';
+                $idToSend=null;
+                if($oneMatchToAnswer!=null){
+                    $image=$oneMatchToAnswer->getTargetImage($id)->image;
+                    $idToSend=$oneMatchToAnswer->id;
+                }
+                else if($newMatchUserId!=null){
+                    $image=User::getUserById($newMatchUserId)->image;
+                }
+
                 //for debug ONLY TOBEREMOVED
                 if($oneMatchToAnswer!=null && true){
                     echo "<br><br><br><br>";
                     echo $oneMatchToAnswer->toString();
+                    echo "<br> ".$idToSend;
                 }
-                return view('match.matchs', ["userMatchs"=>$userMatchs,"proposedMatch"=>$oneMatchToAnswer]);
+                
+                return view('match.matchs', ["userMatchs"=>$userMatchs,"matchToAnswerId"=>$idToSend,"newMatchUserId"=>$newMatchUserId,"image"=>$image],);
             }
             return redirect()->route('login');
     }
-    public function likeMatch(Request $request){
-        $request->validate(['match' => 'required|exists:App\Models\Match']);
-        $temp =  $request->input('match');
-        $m=new Match();
-        $m->user_id1=$temp->user_id1;
-        $m->user_id1=$temp->user_id2;
-        $m->is_done=false;
 
-        if($m->user_id1==Auth::id()){
-            //on est user 1
-            $m->status_user1=true;
-        }
-        else{
-            //on est user 2
-            $m->status_user2=true;
-        }
-        if($m->status_user1 != null && $m->status_user2 != null){
-            //les deux users ce sont prononcés
-            $m->is_done=true;
-        }
-        $m->save();
-        return redirect()->route('matchs');
-    }
-
-    public function dislikeMatch(Request $request){
-        $request->validate(['proposedMatch' => 'required|exists:App\Models\Match']);
-        $temp = $request->input('proposedMatch');
-        $temp =  $request->input('proposedMatch');
-        $m=new Match();
-        $m->user_id1=$temp->user_id1;
-        $m->user_id1=$temp->user_id2;
-        $m->is_done=false;
-        if($m->user_id1==Auth::id()){
-            //on est user 1
-            $m->status_user1=false;
-        }
-        else{
-            //on est user 2
-            $m->status_user2=false;
-        }
-        if($m->status_user1 != null && $m->status_user2 != null){
-            //les deux users ce sont prononcés
-            $m->is_done=true;
-        }
-        $m->save();
+    public function likeDislikeMatch(Request $request){
+        $request->validate();
+        
         return redirect()->route('matchs');
     }
 }

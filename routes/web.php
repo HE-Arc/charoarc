@@ -22,8 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
-Route::post("/matchs/like", [MatchController::class, 'likeMatch'])->name("likeMatch");
-Route::post("/matchs/dislike", [MatchController::class, 'dislikeMatch'])->name("dislikeMatch");
+Route::post("/matchs/likeDislikeMatch", [MatchController::class, 'likeDislikeMatch'])->name("likeDislikeMatch");
 
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
