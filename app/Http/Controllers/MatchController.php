@@ -80,32 +80,31 @@ class MatchController extends Controller
                     }
                     if($indexPossibleMatchs>0){
                         $newMatchUserId=$possibleUsersToMatchWith[random_int(0,$indexPossibleMatchs-1)]->id;
-                        //fordebug
-                        $oneMatchToAnswer=new Match();
-                        $oneMatchToAnswer->user_id1=$id;
-                        $oneMatchToAnswer->user_id2=$newMatchUserId;
-                        $oneMatchToAnswer->status_user1=false;
-                        $oneMatchToAnswer->status_user2=false;
-                        $oneMatchToAnswer->is_done=false;
-                        //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
-                        }
+                     }
                 }
              
                 $image='default.png';
                 $idToSend=null;
                 $name=null;
-                if($oneMatchToAnswer!=null){
+                if($oneMatchToAnswer!=null){//cas match existant
                     $image=$oneMatchToAnswer->getTargetImage($id)->image;
                     $idToSend=$oneMatchToAnswer->id;
                     $name=Match::getMatchById($idToSend)->getUserNameTargetFromIdLogged($id);
                 }
-                else if($newMatchUserId!=null){
+                else if($newMatchUserId!=null){//cas creation possible d'un futur match
                     $image=User::getUserById($newMatchUserId)->image;
                     $name=User::getUserById($newMatchUserId)->name;
                 }
 
                 //for debug ONLY TOBEREMOVED
                 if($oneMatchToAnswer!=null && false){
+                     //fordebug
+                     $oneMatchToAnswer=new Match();
+                     $oneMatchToAnswer->user_id1=$id;
+                     $oneMatchToAnswer->user_id2=$newMatchUserId;
+                     $oneMatchToAnswer->status_user1=false;
+                     $oneMatchToAnswer->status_user2=false;
+                     $oneMatchToAnswer->is_done=false;
                     echo "<br><br><br>";
                     echo $oneMatchToAnswer->toString();
                 }
@@ -116,8 +115,12 @@ class MatchController extends Controller
     }
 
     public function likeDislikeMatch(Request $request){
-        $request->validate();
+        $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
+        $matchId = $request->input('matchToAnswerId');
+        $newMatchUserId = $request->input('newMatchUserId');
         
+        if()
+
         return redirect()->route('matchs');
     }
 }
