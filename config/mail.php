@@ -40,7 +40,7 @@ return [
             'port' => env('MAIL_PORT', 25),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME', "charoarc.noreply@gmail.com"),
-            'password' => env('MAIL_PASSWORD', "Omnia Vincit Amor"),
+            'password' => env('MAIL_PASSWORD', ""),
             'timeout' => null,
             'auth_mode' => null,
         ],
