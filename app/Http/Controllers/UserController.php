@@ -72,7 +72,10 @@
                 $image = $request->inImage->hashName();
                 //del old img
                 $user = User::getUserById($id);
-                Storage::delete('public/'. $user->image);
+                if($user->image != "defaultUser.jpg")
+                {
+                    Storage::delete('public/'. $user->image);
+                }
                 //update new img
                 User::updateUserImage($id, $image);
             }

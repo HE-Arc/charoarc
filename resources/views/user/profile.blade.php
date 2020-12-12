@@ -44,16 +44,16 @@
                             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                                 <div class="p-6 bg-white border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
-                                        action="{{ route('updateMe', ['id' => $user->id, 'inImage' => $inImage ?? 'toto'])}}">
+                                        action="{{ route('updateMe', ['id' => $user->id, 'inImage' => $inImage ?? ''])}}">
                                         @csrf
                                         <x-label> Image : </x-label>
                                        
                                         <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
                                             @if(!empty($user->image))
-                                                <img src="{{ asset( 'storage/' . $user->image ) }}"  width="40%" height="auto">
+                                                <img src="{{ asset( 'storage/' . $user->image ) }}"  width="20%" height="auto">
                                             @else
-                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="40%" height="auto">
+                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="20%" height="auto">
                                             @endif <div></div>
                                         </div>
                                         <x-input  type="file" id="inImage" name="inImage" />
