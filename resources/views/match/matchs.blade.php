@@ -49,6 +49,7 @@
                 <tr style="border-bottom: 5px solid #5b596e;">
                 <td>{{ __('Your Target') }}</td>
                 <td>{{ __('Status') }}</td>
+                <td></td>
                 </tr>
                 @foreach($userMatchs as $singleMatch)
                     <?php echo $singleMatch->asHtmlTableRow($singleMatch);?>

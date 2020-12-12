@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\MatchController;
 
 class Match extends Model
 {
@@ -34,7 +34,22 @@ class Match extends Model
 
     public  function asHtmlTableRow($singleMatch){
        if($singleMatch->toBeDisplayed(Auth::id()))
-            return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6"><td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td><td>'.$singleMatch->getMatchTextStatus().'</td></tr>';
+            if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
+                return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
+                <td>'.$singleMatch->getMatchTextStatus().'</td>
+                <td>        
+                    <form method="POST" action="'.MatchController::matchInDetails.'">
+                        <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
+                        <input type ="submit" value="Details" style="background-color:lightblue; border-radius: 9px;" ></input>
+                    </form>
+                </td>
+                </tr>';
+            else
+                return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
+                <td>'.$singleMatch->getMatchTextStatus().'</td>
+                </tr>';
     }
 
     public function getUserNameTargetFromIdLogged($userId){
@@ -42,6 +57,12 @@ class Match extends Model
             return User::getUserById($this->user_id1)->name;
         if($userId==$this->user_id1)
             return User::getUserById($this->user_id2)->name;
+    }
+    public function getUserTargetFromIdLogged($userId){
+        if($userId==$this->user_id2)
+            return User::getUserById($this->user_id1);
+        if($userId==$this->user_id1)
+            return User::getUserById($this->user_id2);
     }
 
     public function toBeDisplayed($currentUserId){

@@ -30,6 +30,17 @@ class MatchController extends Controller
             }
             return redirect()->route('login');
     }
+    public static function matchInDetails(Request $request){
+
+        $matchId=1;
+    
+        $user=Match::getUserTargetFromIdLogged(Auth::id());
+        $image=$user->getImage();
+        $age=$user->age!=null?Carbon::now()-$user->age:'Age unknow';
+        $date=Match::getMatchById($matchId)->created_at;
+        return view('match.detailMatch', ['name'=>$user->name,'image'=>$image,'date'=>$date,'age'=>$age,'mail'=>$user->email],);
+    }
+    
 
     public function like(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
