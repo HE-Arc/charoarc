@@ -6,9 +6,11 @@
         <tr>
         @if($matchToAnswerId !=null || $newMatchUserId !=null)
         <td>
-            <form method="POST" action="{{route('dislike')}}">
-                @csrf
-                {{ Form::hidden('invisibleLike', '[$matchToAnswerId,$newMatchUserId]') }}
+             
+            <form method="POST" action="{{route('dislike')}}"> 
+            @csrf
+                <input type="hidden" name="matchToAnswerId" value="{{$matchToAnswerId}}"></input>
+                <input type="hidden" name="newMatchUserId" value="{{$newMatchUserId}}"></input>
                 <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
             </form>
         </td>
@@ -16,12 +18,12 @@
         <td  style="width:75%;height:70%;margin:0 auto;">
             <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
         </td>
-            @if($matchToAnswerId !=null || $newMatchUserId !=null)
+        @if($matchToAnswerId !=null || $newMatchUserId !=null)
             <td >
             <form method="POST" action="{{route('like')}}">
-                @csrf
-                <input type="hidden" value="{{$matchToAnswerId}}"></input>
-                <input type="hidden" value="{{$newMatchUserId}}"></input>
+            @csrf
+                <input type="hidden" name="matchToAnswerId" value="{{$matchToAnswerId}}"></input>
+                <input type="hidden" name="newMatchUserId" value="{{$newMatchUserId}}"></input>
                 <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
                 </form>
             </td>

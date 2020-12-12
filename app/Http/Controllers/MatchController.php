@@ -115,38 +115,38 @@ class MatchController extends Controller
     }
 
     public function like(Request $request){
-        $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
-        
-        $matchId = $request->input('matchToAnswerId');
-        $newMatchUserId = $request->input('newMatchUserId');
-        
-        echo '<br><br><br><br>'.$matchId . "id m / id usr ".$newMatchUserId;
+        if ($request->has('matchToAnswerId') && $request->has('newMatchUserId')){
 
-        if($matchId!=null){
-            //match existant
-            $m=Match::getMatchById($matchId);
-            if( $m->user_id1==Auth::id()){
-
+            $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
+            $matchId = $request->input('matchToAnswerId');
+            $newMatchUserId = $request->input('newMatchUserId');
             
-           $m->status_user1=true;
-        }else{
-            $m->status_user2=true;
-        }
-        $m->is_done=true;
-            $m->save();
-        }
-        else if($newMatchUserId != null){
-            //creation du match
-            $newMatch=new Match();        
-            $newMatch->user_id1=Auth::id();
-            $newMatch->user_id2=$newMatchUserId;
-            $newMatch->status_user1=true;
-            $newMatch->status_user2=false;
-            $newMatch->is_done=false;
-            $newMatch->save();
+            echo "avant test";
+
+            if($matchId!=null){
+                //match existant
+                $m=Match::getMatchById($matchId);
+                if( $m->user_id1==Auth::id()){
+                    $m->status_user1=true;
+                }else{
+                    $m->status_user2=true;
+                }
+                $m->is_done=true;
+                $m->save();
+            }
+            else if($newMatchUserId != null){
+                //creation du match
+                $newMatch=new Match();        
+                $newMatch->user_id1=Auth::id();
+                $newMatch->user_id2=$newMatchUserId;
+                $newMatch->status_user1=true;
+                $newMatch->status_user2=false;
+                $newMatch->is_done=false;
+                $newMatch->save();
+            }
         }
 
-       // return redirect()->route('matchs');
+       return redirect()->route('matchs');
     }
     public function dislike(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
