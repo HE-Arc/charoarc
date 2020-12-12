@@ -14,11 +14,9 @@
                 <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
             </form>
         </td>
-        @endif
         <td  style="width:75%;height:auto;margin:0 auto;">
             <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
         </td>
-        @if($matchToAnswerId !=null || $newMatchUserId !=null)
             <td >
             <form method="POST" action="{{route('like')}}">
             @csrf
@@ -27,7 +25,12 @@
                 <input type ="submit" value="Like" style=" float:right;background-color:green; border-radius: 9px;" ></input>
                 </form>
             </td>
+            @else
+            <td  style="width:75%;height:auto;margin:0 auto;">
+            <img src="{{__(asset( 'storage/default.png'))}}" alt="target image" >
+            </td>
             @endif
+            
         </tr>
         @if($name !=null)
         <tr style="text-align:center;">

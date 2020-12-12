@@ -83,7 +83,7 @@ class MatchController extends Controller
                      }
                 }
              
-                $image='default.png';
+                $image='defaultUser.jpg';
                 $idToSend=null;
                 $name=null;
                 if($oneMatchToAnswer!=null){//cas match existant
