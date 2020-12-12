@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <x-slot name="slot">            
-            <div style="text-align:center;">
+            <div class="text-center">
                                     <!-- Change Name -->
                 <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
@@ -31,16 +31,14 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'inImage' => $inImage ?? 'toto'])}}">
                                         @csrf
                                         <x-label> Image : </x-label>
-                                        <div style="display:flex; justify-content:space-around;
-    text-align:center;margin:auto;">    
+                                       
+                                        <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
                                             @if(!empty($user->image))
                                                 <img src="{{ asset( 'storage/' . $user->image ) }}"  width="40%" height="auto">
                                             @else
-                                            <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="40%" height="auto">
-                                            @endif
-                                            <div></div>
-                                            
+                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="40%" height="auto">
+                                            @endif <div></div>
                                         </div>
                                         <x-input  type="file" id="inImage" name="inImage" />
                                         <br><x-button>Change</x-button>
