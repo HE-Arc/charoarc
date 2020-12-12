@@ -18,6 +18,8 @@ class MatchsSeeder extends Seeder
         $m=new Match();
         $m->user_id1=1;
         $m->user_id2=2;
+        
+        $m->status_user2=false;
         $m->status_user1=true;
         $m->is_done=false;
         $m->save();
@@ -34,6 +36,7 @@ class MatchsSeeder extends Seeder
         $m->user_id1=2;
         $m->user_id2=4;
         $m->status_user2=true;
+        $m->status_user1=false;
         $m->is_done=false;
         $m->save();
     }

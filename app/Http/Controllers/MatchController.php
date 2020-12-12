@@ -27,12 +27,13 @@ class MatchController extends Controller
                 $indexMatchsToAnswer=0;
                 $oneMatchToAnswer=null;
                 $newMatchUserId=null;
+
                 foreach($userMatchs as $m){
                     if($m->user_id1==$id){
+                        $user2=User::getUserById($m->user_id2);
                         //cas on est user 1
                         if($m->status_user1 == false && $m->is_done==false){
                             //on n'a pas encore voté on propose donc le match si respect regles
-                            $user2=User::getUserById($m->user_id2);
                             if($userMe->gender== $user2->interessedBy && $user2->gender== $userMe->interessedBy){
                                 //on correspond
                                 $matchsToAnswer[$indexMatchsToAnswer++]=$m;
@@ -43,17 +44,17 @@ class MatchController extends Controller
                         }
                     }
                     else if($m->user_id2==$id){
+                        $user1=User::getUserById($m->user_id1);
                         //cas on est user 2
                         if($m->status_user2 == false && $m->is_done==false){
-                           //on n'a pas encore voté on propose donc le match si respect regles
-                           $user1=User::getUserById($m->user_id1);
-                           if($user1->gender== $userMe->interessedBy && $userMe->gender== $user1->interessedBy){
-                               //on correspond
-                               $matchsToAnswer[$indexMatchsToAnswer++]=$m;
-                           }
-                           else{
-                               $m->is_done=true;
-                           }
+                            //on n'a pas encore voté on propose donc le match si respect regles
+                            if($userMe->gender== $user1->interessedBy && $user1->gender== $userMe->interessedBy){
+                                //on correspond
+                                $matchsToAnswer[$indexMatchsToAnswer++]=$m;
+                            }
+                            else{
+                                $m->is_done=true;
+                            }
                         }
                     }
                 }
@@ -79,9 +80,13 @@ class MatchController extends Controller
                     }
                     if($indexPossibleMatchs>0){
                         $newMatchUserId=$possibleUsersToMatchWith[random_int(0,$indexPossibleMatchs-1)]->id;
-                        // $oneMatchToAnswer->user_id1=$id;
-                        // $oneMatchToAnswer->user_id2=$usrTemp->id;
-                        // $oneMatchToAnswer->is_done=false;
+                        //fordebug
+                        $oneMatchToAnswer=new Match();
+                        $oneMatchToAnswer->user_id1=$id;
+                        $oneMatchToAnswer->user_id2=$newMatchUserId;
+                        $oneMatchToAnswer->status_user1=false;
+                        $oneMatchToAnswer->status_user2=false;
+                        $oneMatchToAnswer->is_done=false;
                         //$oneMatchToAnswer->save(); //TODO to save on click on button like ok dislike but adapt treatment
                         }
                 }
@@ -97,10 +102,9 @@ class MatchController extends Controller
                 }
 
                 //for debug ONLY TOBEREMOVED
-                if($oneMatchToAnswer!=null && true){
-                    echo "<br><br><br><br>";
+                if($oneMatchToAnswer!=null && false){
+                    echo "<br><br><br>";
                     echo $oneMatchToAnswer->toString();
-                    echo "<br> ".$idToSend;
                 }
                 
                 return view('match.matchs', ["userMatchs"=>$userMatchs,"matchToAnswerId"=>$idToSend,"newMatchUserId"=>$newMatchUserId,"image"=>$image],);
