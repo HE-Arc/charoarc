@@ -32,62 +32,28 @@ class MatchController extends Controller
     }
 
     public function like(Request $request){
-        if ($request->has('matchToAnswerId') && $request->has('newMatchUserId')){
-
-            $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
-            $matchId = $request->input('matchToAnswerId');
-            $newMatchUserId = $request->input('newMatchUserId');
-            
-            echo "avant test";
-
-            if($matchId!=null){
-                //match existant
-                $m=Match::getMatchById($matchId);
-                if( $m->user_id1==Auth::id()){
-                    $m->status_user1=true;
-                }else{
-                    $m->status_user2=true;
-                }
-                $m->is_done=true;
-                $m->save();
-            }
-            else if($newMatchUserId != null){
-                //creation du match
-                $newMatch=new Match();        
-                $newMatch->user_id1=Auth::id();
-                $newMatch->user_id2=$newMatchUserId;
-                $newMatch->status_user1=true;
-                $newMatch->status_user2=false;
-                $newMatch->is_done=false;
-                $newMatch->save();
-            }
-        }
-
+        $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
+        $matchId = $request->input('matchToAnswerId');
+        $newMatchUserId = $request->input('newMatchUserId');
+        MatchController::likeOrDislike($matchId,$newMatchUserId,true,false);
        return redirect()->route('matchs');
     }
     public function dislike(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
         $matchId = $request->input('matchToAnswerId');
         $newMatchUserId = $request->input('newMatchUserId');
-        
+        MatchController::likeOrDislike($matchId,$newMatchUserId,false,true);
+        return redirect()->route('matchs');
+    }
+
+    public static function likeOrDislike($matchId,$newMatchUserId,$bool1,$bool2){
         if($matchId!=null){
             //match existant
-            $m=Match::getMatchById($matchId);
-            $m->user_id1==Auth::id()?$m->status_user1=false:$m->status_user2=false;
-            $m->is_done=true;
-            $m->save();
+            Match::updateByLikeOrDislike($matchId,$bool1);
         }
         else if($newMatchUserId != null){
             //creation du match
-            $newMatch=new Match();        
-            $newMatch->user_id1=Auth::id();
-            $newMatch->user_id2=$newMatchUserId;
-            $newMatch->status_user1=false;
-            $newMatch->status_user2=false;
-            $newMatch->is_done=true;//on dislike donc on veux plus revoir ce match
-            $newMatch->save();
+            Match::createAndStore($newMatchUserId,$bool2);
         }
-
-        return redirect()->route('matchs');
     }
 }

@@ -68,6 +68,22 @@ class Match extends Model
 
     //static
 
+    public static function updateByLikeOrDislike($matchId,$status){
+        $m=Match::getMatchById($matchId);
+        $m->user_id1==Auth::id()?$m->status_user1=!$status:$m->status_user2=!$status;
+        $m->is_done=true;
+        $m->save();
+    }
+
+    public static function createAndStore($newMatchUserId,$status){
+        $newMatch=new Match();        
+        $newMatch->user_id1=Auth::id();
+        $newMatch->user_id2=$newMatchUserId;
+        $newMatch->status_user1=!$status;
+        $newMatch->status_user2=false;
+        $newMatch->is_done=$status;
+        $newMatch->save();
+    }
     public static function findATarget(){
         $id=Auth::id();
         $userMe=User::getUserById($id);
@@ -136,12 +152,12 @@ class Match extends Model
         $idToSend=null;
         $name=null;
         if($oneMatchToAnswer!=null){//cas match existant
-            $image=$oneMatchToAnswer->getTargetImage($id)->image;
+            $image=$oneMatchToAnswer->getTargetImage($id)->image!=null?$oneMatchToAnswer->getTargetImage($id)->image:'defaultUser.jpg';
             $idToSend=$oneMatchToAnswer->id;
             $name=Match::getMatchById($idToSend)->getUserNameTargetFromIdLogged($id);
         }
         else if($newMatchUserId!=null){//cas creation possible d'un futur match
-            $image=User::getUserById($newMatchUserId)->image;
+            $image=User::getUserById($newMatchUserId)->image!=null? User::getUserById($newMatchUserId)->image : 'defaultUser.jpg';
             $name=User::getUserById($newMatchUserId)->name;
         }
 
