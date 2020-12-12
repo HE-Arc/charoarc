@@ -36,8 +36,9 @@
 
 
             <!-- Footer -->
-            <footer style="display:flex; justify-content:space-around;
+            <footer style="display:flex; flex-direction: column;justify-content:space-around;
     text-align:center;margin:auto; width:100%;position:relative;bottom:0;">
+                <p>CharoArc - <a href="https://en.wikipedia.org/wiki/Latin" target="_blank">Omnia Vincit Amor</a></p>
                 <a href="https://www.he-arc.ch/ingenierie/bachelor-informatique-logicielle" target="_blank" >HEARC-Neuchâtel INF 3 DLM 2020</a>
             </footer>
         

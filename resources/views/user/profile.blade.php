@@ -108,6 +108,8 @@
                             <select class="form-control" id="inGender" name="inGender" >
                                 <option value="{{  $gender::WOMAN }}">{{  $gender::WOMAN }}</option>
                                 <option value="{{  $gender::MAN }}">{{  $gender::MAN }}</option>
+                        
+                                
                             </select>
                         <x-button>Change</x-button>
                     </form>
