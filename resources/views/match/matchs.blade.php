@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        {{__('Here you can explore new and old matchs !')}}
-    </x-slot>
-    <x-slot name="slot">
+    <div style="height:max">   
     @if(Auth::check())
     <table class="py-2 " style="display:flex; justify-content:space-around;
-    text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
+    text-align:center;margin:auto; width:100%;">
         <tr>
         @if($matchToAnswerId !=null || $newMatchUserId !=null)
         <td>
@@ -16,8 +14,8 @@
             </form>
         </td>
         @endif
-        <td  style="width:75%;height:70%;margin:0 auto;">
-            <img src="{{__(asset( 'storage/'. $image))}}" alt="target image">
+        <td  style="width:auto;height:auto;margin:0 auto;">
+        <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="max-width: 80%;height: auto;">
         </td>
             @if($matchToAnswerId !=null || $newMatchUserId !=null)
             <td>
@@ -29,6 +27,13 @@
             </td>
             @endif
         </tr>
+        @if($name !=null)
+        <tr style="text-align:center;">
+        <td></td>
+        <td>{{__($name)}}</td>
+        <td></td>
+        </tr>
+        @endif
     </table>
     @if(!empty($userMatchs))
     <table class="py-2 " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
@@ -40,7 +45,7 @@
         @foreach($userMatchs as $singleMatch)
             @if($singleMatch->toBeDisplayed(Auth::id()))
                 <tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
-                <td>{{__( $singleMatch->getUserNameFromId(Auth::id()))}}</td>
+                <td>{{__( $singleMatch->getUserNameTargetFromIdLogged(Auth::id()))}}</td>
                 <td>{{__($singleMatch->getMatchTextStatus())}}</td>
                 </tr>
             @endif
@@ -52,5 +57,7 @@
          style="border-bottom: 2px solid #342f61; text-align:center;margin:auto;width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">No matchs yet !</p>
     @endif     
     @endif
+    </div>
+ 
     </x-slot>
 </x-app-layout>

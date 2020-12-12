@@ -31,7 +31,7 @@ class Match extends Model
         return  'user_id1 : '.$this->user_id1.' user_id2 : '.$this->user_id2.' status_user1 : '.$this->status_user1.' status_user2 : '.$this->status_user2.' is_done : '.$this->is_done;
     }
 
-    public function getUserNameFromId($userId){
+    public function getUserNameTargetFromIdLogged($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1)->name;
         if($userId==$this->user_id1)

@@ -93,12 +93,15 @@ class MatchController extends Controller
              
                 $image='default.png';
                 $idToSend=null;
+                $name=null;
                 if($oneMatchToAnswer!=null){
                     $image=$oneMatchToAnswer->getTargetImage($id)->image;
                     $idToSend=$oneMatchToAnswer->id;
+                    $name=Match::getMatchById($idToSend)->getUserNameTargetFromIdLogged($id);
                 }
                 else if($newMatchUserId!=null){
                     $image=User::getUserById($newMatchUserId)->image;
+                    $name=User::getUserById($newMatchUserId)->name;
                 }
 
                 //for debug ONLY TOBEREMOVED
@@ -107,7 +110,7 @@ class MatchController extends Controller
                     echo $oneMatchToAnswer->toString();
                 }
                 
-                return view('match.matchs', ["userMatchs"=>$userMatchs,"matchToAnswerId"=>$idToSend,"newMatchUserId"=>$newMatchUserId,"image"=>$image],);
+                return view('match.matchs', ["userMatchs"=>$userMatchs,"matchToAnswerId"=>$idToSend,"newMatchUserId"=>$newMatchUserId,"image"=>$image,"name"=>$name],);
             }
             return redirect()->route('login');
     }
