@@ -15,7 +15,7 @@
             </form>
         </td>
         @endif
-        <td  style="width:75%;height:70%;margin:0 auto;">
+        <td  style="width:75%;height:auto;margin:0 auto;">
             <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
         </td>
         @if($matchToAnswerId !=null || $newMatchUserId !=null)
