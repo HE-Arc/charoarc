@@ -6,6 +6,22 @@
     </x-slot>
     <x-slot name="slot">            
             <div class="text-center">
+
+                    <!-- message error -->
+                @if ($errors->any())
+                    <div class="py-20 text-left">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
+                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-white border-b border-gray-200">
+                                    <img src="https://cdn.pixabay.com/photo/2013/07/13/10/33/cross-157492_1280.png" width="100" height="100">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                                     <!-- Change Name -->
                 <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
