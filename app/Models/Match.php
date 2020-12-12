@@ -32,6 +32,11 @@ class Match extends Model
         return  'user_id1 : '.$this->user_id1.' user_id2 : '.$this->user_id2.' status_user1 : '.$this->status_user1.' status_user2 : '.$this->status_user2.' is_done : '.$this->is_done;
     }
 
+    public  function asHtmlTableRow($singleMatch){
+       if($singleMatch->toBeDisplayed(Auth::id()))
+            return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6"><td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td><td>'.$singleMatch->getMatchTextStatus().'</td></tr>';
+    }
+
     public function getUserNameTargetFromIdLogged($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1)->name;
