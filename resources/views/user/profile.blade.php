@@ -4,7 +4,7 @@
             {{ __('Profile') }}
         </h2>
     </x-slot>
-    <x-slot name="slot">            
+    <x-slot name="slot"> <br>           
             <div class="text-center">
 
                     <!-- message error -->
@@ -13,7 +13,7 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
                             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                                 <div class="p-6 bg-white border-b border-gray-200">
-                                    <img src="https://cdn.pixabay.com/photo/2013/07/13/10/33/cross-157492_1280.png" width="100" height="100">
+                                    <img src="{{ asset( 'storage/cross.png' ) }}" width="35%" height="auto">
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach

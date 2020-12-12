@@ -18,6 +18,7 @@
                         {{ __('CharoArc') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
