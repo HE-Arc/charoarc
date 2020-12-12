@@ -17,8 +17,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <div class="min-h-screen bg-gray-100">
-    <body class="font-sans antialiased" style=" display: flex;
-  flex-direction: column;">
+    <body class="font-sans antialiased">
         
             @include('layouts.navigation')
 
@@ -38,7 +37,7 @@
 
             <!-- Footer -->
             <footer style="display:flex; justify-content:space-around;
-    text-align:center;margin:auto; width:100%;position:absolute;bottom:0;">
+    text-align:center;margin:auto; width:100%;position:relative;bottom:0;">
                 <a href="https://www.he-arc.ch/ingenierie/bachelor-informatique-logicielle" target="_blank" >HEARC-Neuchâtel INF 3 DLM 2020</a>
             </footer>
         
