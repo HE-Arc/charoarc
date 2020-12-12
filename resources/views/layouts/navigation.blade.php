@@ -16,6 +16,9 @@
                     <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
                         {{ __('CharoArc') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                        {{ __('Profile') }}
+                    </x-nav-link>
                 </div>
 
             </div>
