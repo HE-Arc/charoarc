@@ -60,14 +60,11 @@
             if ($request->has('CurrentPassword','Password', 'ConfirmePassword')) 
             {
                  $request->validate([
-                     'CurrentPassword'=>'min:6|required',
+                     'CurrentPassword'=>'min:6|required|same:Auth::user()->password',
                     'Password' => 'min:6|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
                     'ConfirmePassword' => 'min:6' ]);
-                $currentPassword=$request->input('CurrentPassword');
                 $password = $request->input('Password');
-                if (Hash::check($currentPassword, Auth::user()->password)) {
-                    User::updateUserPassword($id, $password);
-                }
+                User::updateUserPassword($id, $password);
             }
             if ($request->hasFile('Image'))
             {
