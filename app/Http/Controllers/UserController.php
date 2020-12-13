@@ -7,6 +7,9 @@
     use Illuminate\Http\Request;
     use Illuminate\Routing\Controller;
     use Illuminate\Support\Facades\Auth;
+    use App\Rules\HashCheck;
+
+    
 
     class UserController extends Controller
     {
@@ -56,13 +59,19 @@
                 $interessedBy = $request->input('InteressedBy');
                 User::updateUserInteressedBy($id, $interessedBy);
             }
-            if ($request->has('Password', 'ConfirmePassword')) 
+            if ($request->has('CurrentPassword','Password', 'ConfirmePassword')) 
             {
-                 $request->validate([
+                $request->validate([
+                    'CurrentPassword' => [
+                        'required', 
+                        new HashCheck()
+                    ]
+                ]);
+                $request->validate([
+                     'CurrentPassword'=>'min:6|required',
                     'Password' => 'min:6|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
                     'ConfirmePassword' => 'min:6' ]);
                 $password = $request->input('Password');
-                $confirmePassword = $request->input('ConfirmePassword');
                 User::updateUserPassword($id, $password);
             }
             if ($request->hasFile('Image'))
