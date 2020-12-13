@@ -76,6 +76,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         $user = User::find($id);
         $user->email=$email;
+        $user->email_verified_at=null;
         $user->save();
     }
     public static function updateUserGender($id, $gender)
