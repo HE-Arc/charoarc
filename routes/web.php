@@ -24,8 +24,6 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::post("/verifyEmail",[EmailVerificationPromptController::class,'__invoke'])->name("verifyEmail");
-
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
 Route::post("/matchs/like", [MatchController::class, 'like'])->name("like")->middleware('verified');
 Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("dislike")->middleware('verified');

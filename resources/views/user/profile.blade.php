@@ -75,12 +75,6 @@
                                         <x-input type="email" id="Email" name="Email" placeholder="your@email.ch" required/>
                                         <br><x-button class="pt-5">Change</x-button>
                                     </form>
-                                    @if(!Auth::user()->hasVerifiedEmail())
-                                    <form class="text-center" method="POST" action="{{route('verifyEmail')}}">
-                                        @csrf
-                                        <input type ="submit" value="Verify Email" style="background-color:purple; border-radius: 9px;" ></input>
-                                    </form>
-                                    @endif
                                 </div>
                             </div>
                         </div>
