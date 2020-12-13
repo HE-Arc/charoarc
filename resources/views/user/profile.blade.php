@@ -55,7 +55,7 @@
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Image' => $Image ?? ''])}}">
                                         @csrf
-                                        <x-label> Image : </x-label>
+                                        <x-label> Picture : </x-label>
                                        
                                         <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
@@ -112,7 +112,7 @@
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'InteressedBy' => $InteressedBy ?? ''])}}">
                                         @csrf
-                                        <x-label value=" Interessed by : {{ $user->interessedBy }}"/>
+                                        <x-label value=" Interested by : {{ $user->interessedBy }}"/>
                                             @inject('gender', 'App\Models\Gender')
                                             <select class="form-control" id="InteressedBy" name="InteressedBy" >
                                             <option value="{{  $gender::WOMAN }}">{{  $gender::WOMAN }}</option>
@@ -165,7 +165,7 @@
                                         <x-input type="password" id="CurrentPassword" name="CurrentPassword" placeholder="Current Password" required/>
                                         <x-label> New password  </x-label>
                                         <x-input type="password" id="Password" name="Password" placeholder="New password" required/>
-                                        <x-label> Confirme password  </x-label>
+                                        <x-label> Confirm password  </x-label>
                                         <x-input type="password" id="ConfirmePassword" name="ConfirmePassword" placeholder="Confirme password" required/>
                                         <br><x-button>Change</x-button>
                                     </form>
