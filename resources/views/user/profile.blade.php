@@ -21,11 +21,7 @@
                                     <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;">
                                         <p></p>    
                                         @foreach ($errors->all() as $error)
-                                            @if($error=='The current password and auth::user()->password must match.')
-                                                <li>{{__('The submitted current password is incorrect.')}}</li>
-                                            @else
                                                 <li>{{ __($error) }}</li>
-                                            @endif
                                         @endforeach
                                         <p></p>
                                     </div>
