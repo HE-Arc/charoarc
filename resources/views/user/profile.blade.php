@@ -150,8 +150,10 @@
                             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
                                 <div class="p-6 bg-white border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
-                                        action="{{ route('updateMe', ['id' => $user->id, 'Password' => $ConfirmePassword ?? '', 'ConfirmePassword' => $ConfirmePassword ?? ''])}}">
+                                        action="{{ route('updateMe', ['id' => $user->id, 'CurrentPassword' => $CurrentPassword ?? '','Password' => $Password ?? '', 'ConfirmePassword' => $ConfirmePassword ?? ''])}}">
                                         @csrf
+                                        <x-label> Current password  </x-label>
+                                        <x-input type="password" id="CurrentPassword" name="CurrentPassword" placeholder="Current Password" required/>
                                         <x-label> New password  </x-label>
                                         <x-input type="password" id="Password" name="Password" placeholder="New password" required/>
                                         <x-label> Confirme password  </x-label>
