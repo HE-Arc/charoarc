@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
 Route::post("/matchs/like", [MatchController::class, 'like'])->name("like");
 Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("dislike");
-Route::post("/matchs/details",[MatchController::class, 'matchInDetails']);
+Route::post("/matchs/details",[MatchController::class, 'details'])->name("details");
 
 
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
-
+use DateTime; //Libraires DateTime
+use DateInterval; //Libraires DateInterval, pour les formats
 
 use Illuminate\Http\Request;
 
@@ -30,14 +30,16 @@ class MatchController extends Controller
             }
             return redirect()->route('login');
     }
-    public static function matchInDetails(Request $request){
-
-        $matchId=1;
-    
-        $user=Match::getUserTargetFromIdLogged(Auth::id());
+    public static function details(Request $request){
+        $request->validate([['matchId' => 'required|exists:App\Models\Match,id'],]); 
+        $matchId = $request->input('matchId');
+        $user=Match::getMatchById($matchId)->getUserTargetFromIdLogged(Auth::id());
         $image=$user->getImage();
-        $age=$user->age!=null?Carbon::now()-$user->age:'Age unknow';
-        $date=Match::getMatchById($matchId)->created_at;
+        $currentDate = new DateTime(); //Date actuelle format DateTime
+        $bornDate = new DateTime($user->birthday)!=null?new DateTime($user->birthday):new DateTime(); //Date de naissance format EN depuis la BDD, dans un DateTime
+        $age = date_diff($currentDate,  $bornDate)->format('%y'); //Format '%y' = seulement les années séparant les 2 dates
+        $age=$age==0?'Age unknow':$age;
+        $date=Match::getMatchById($matchId)->updated_at;
         return view('match.detailMatch', ['name'=>$user->name,'image'=>$image,'date'=>$date,'age'=>$age,'mail'=>$user->email],);
     }
     

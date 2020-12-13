@@ -39,7 +39,8 @@ class Match extends Model
                 <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                 <td>'.$singleMatch->getMatchTextStatus().'</td>
                 <td>        
-                    <form method="POST" action="'.MatchController::matchInDetails.'">
+                    <form method="POST" action="'.route('details').'">
+                        <input type="hidden" name="_token" value="'.csrf_token().'" />
                         <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
                         <input type ="submit" value="Details" style="background-color:lightblue; border-radius: 9px;" ></input>
                     </form>
