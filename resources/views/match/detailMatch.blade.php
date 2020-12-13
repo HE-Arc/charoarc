@@ -8,12 +8,12 @@
     @if(Auth::check())
         <table class="py-2 " style="display:flex; justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
             <tr>
-                    <td  style="width:40%;height:auto;margin:0 auto;">
+                    <td  style="width:50%;height:auto;margin:0 auto;">
                         <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
                     </td>        
             
                 <td style="text-align:right;">
-                    <table class="py-2 " style="text-align:center;margin:auto;width:55%;margin-top: 5%; ">
+                    <table class="py-2 " style="text-align:center;margin:auto;width:45%;margin-top: 5%; ">
                     <tr><td>Name : {{$name}}</td></tr>
                     <tr><td>Age : {{$age}}</td></tr>
                     <tr><td>Matched on : {{$date}}</td></tr>
