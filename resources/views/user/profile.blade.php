@@ -22,7 +22,7 @@
                                         <p></p>    
                                         @foreach ($errors->all() as $error)
                                             @if($error=='The current password and auth::user()->password must match.')
-                                                <li>{{__('The current password and new password must match.')}}</li>
+                                                <li>{{__('The submitted current password is incorrect.')}}</li>
                                             @else
                                                 <li>{{ __($error) }}</li>
                                             @endif

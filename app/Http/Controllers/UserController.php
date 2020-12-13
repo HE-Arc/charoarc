@@ -7,7 +7,9 @@
     use Illuminate\Http\Request;
     use Illuminate\Routing\Controller;
     use Illuminate\Support\Facades\Auth;
-    use Illuminate\Support\Facades\Hash;
+    use App\Rules\HashCheck;
+
+    
 
     class UserController extends Controller
     {
@@ -59,8 +61,14 @@
             }
             if ($request->has('CurrentPassword','Password', 'ConfirmePassword')) 
             {
-                 $request->validate([
-                     'CurrentPassword'=>'min:6|required|same:Auth::user()->password',
+                $request->validate([
+                    'CurrentPassword' => [
+                        'required', 
+                        new HashCheck()
+                    ]
+                ]);
+                $request->validate([
+                     'CurrentPassword'=>'min:6|required',
                     'Password' => 'min:6|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
                     'ConfirmePassword' => 'min:6' ]);
                 $password = $request->input('Password');
