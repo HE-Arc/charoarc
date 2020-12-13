@@ -22,6 +22,9 @@
                 </td>
             </tr>
         </table>
+        <form class="text-center" method="GET" action="{{route('matchs')}}">
+            <input type ="submit" value="Back" style="background-color:purple; border-radius: 9px;" ></input>
+        </form>
     @endif 
     </x-slot>
 </x-app-layout>

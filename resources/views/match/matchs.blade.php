@@ -44,6 +44,9 @@
                 </tr>
             @endif
         </table>
+        <form class="text-center" method="GET" action="{{route('matchs')}}">
+            <input type ="submit" value="Refresh" style="background-color:yellow; border-radius: 9px;" ></input>
+        </form>
         @if(!empty($userMatchs))
             <table class="py-2 " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
                 <tr style="border-bottom: 5px solid #5b596e;">
