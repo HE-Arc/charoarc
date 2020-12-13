@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
-use DateTime; //Libraires DateTime
-use DateInterval; //Libraires DateInterval, pour les formats
+use DateTime; 
 
 use Illuminate\Http\Request;
 

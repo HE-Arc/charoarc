@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -22,6 +23,8 @@ Route::get('/', function () {
         return redirect('matchs'); 
     return redirect('login');
 });
+
+Route::post("/verifyEmail",[EmailVerificationPromptController::class,'__invoke'])->name("verifyEmail");
 
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
 Route::post("/matchs/like", [MatchController::class, 'like'])->name("like")->middleware('verified');
