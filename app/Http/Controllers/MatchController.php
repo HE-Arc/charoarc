@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
-use DateTime; //Libraires DateTime
-use DateInterval; //Libraires DateInterval, pour les formats
+use DateTime; 
 
 use Illuminate\Http\Request;
 
@@ -48,25 +47,25 @@ class MatchController extends Controller
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
         $matchId = $request->input('matchToAnswerId');
         $newMatchUserId = $request->input('newMatchUserId');
-        MatchController::likeOrDislike($matchId,$newMatchUserId,true,false);
+        MatchController::likeOrDislike($matchId,$newMatchUserId,true);
        return redirect()->route('matchs');
     }
     public function dislike(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
         $matchId = $request->input('matchToAnswerId');
         $newMatchUserId = $request->input('newMatchUserId');
-        MatchController::likeOrDislike($matchId,$newMatchUserId,false,true);
+        MatchController::likeOrDislike($matchId,$newMatchUserId,false);
         return redirect()->route('matchs');
     }
 
-    public static function likeOrDislike($matchId,$newMatchUserId,$bool1,$bool2){
+    public static function likeOrDislike($matchId,$newMatchUserId,$bool){
         if($matchId!=null){
             //match existant
-            Match::updateByLikeOrDislike($matchId,$bool1);
+            Match::updateByLikeOrDislike($matchId,$bool);
         }
         else if($newMatchUserId != null){
             //creation du match
-            Match::createAndStore($newMatchUserId,$bool2);
+            Match::createAndStore($newMatchUserId,$bool);
         }
     }
 }

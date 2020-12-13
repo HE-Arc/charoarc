@@ -73,7 +73,7 @@
                                         @csrf
                                         <x-label> Email :  {{ $user->email }}  </x-label>
                                         <x-input type="email" id="Email" name="Email" placeholder="your@email.ch" required/>
-                                        <br> <x-button>Change</x-button>
+                                        <br><x-button class="pt-5">Change</x-button>
                                     </form>
                                 </div>
                             </div>
