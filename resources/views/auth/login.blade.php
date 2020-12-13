@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
+    <div class="text-center"><h2>Welcome back on CharoArc</h2></div>
         <x-slot name="logo">
-            <a href="/">
+            <a href="/" class="text-center">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>

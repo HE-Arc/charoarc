@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable  implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -76,6 +76,7 @@ class User extends Authenticatable
     {
         $user = User::find($id);
         $user->email=$email;
+        $user->email_verified_at=null;
         $user->save();
     }
     public static function updateUserGender($id, $gender)
