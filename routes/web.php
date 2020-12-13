@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', function () {
     if(Auth::check())
         return redirect('matchs'); 
@@ -22,9 +24,9 @@ Route::get('/', function () {
 });
 
 Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
-Route::post("/matchs/like", [MatchController::class, 'like'])->name("like");
-Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("dislike");
-Route::post("/matchs/details",[MatchController::class, 'details'])->name("details");
+Route::post("/matchs/like", [MatchController::class, 'like'])->name("like")->middleware('verified');
+Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("dislike")->middleware('verified');
+Route::post("/matchs/details",[MatchController::class, 'details'])->name("details")->middleware('verified');
 
 
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");

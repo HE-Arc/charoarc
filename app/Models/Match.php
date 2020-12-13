@@ -97,7 +97,13 @@ class Match extends Model
 
     public static function updateByLikeOrDislike($matchId,$status){
         $m=Match::getMatchById($matchId);
-        $m->user_id1==Auth::id()?$m->status_user1=!$status:$m->status_user2=!$status;
+        if( $m->user_id1==Auth::id()){
+            //cas on est l utilisateur est id1
+            $m->status_user1=!$status;
+        }else{
+            //cas utilisateur est id2
+            $m->status_user1=!$status;
+        }
         $m->is_done=true;
         $m->save();
     }
