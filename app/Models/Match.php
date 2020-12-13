@@ -99,10 +99,10 @@ class Match extends Model
         $m=Match::getMatchById($matchId);
         if( $m->user_id1==Auth::id()){
             //cas on est l utilisateur est id1
-            $m->status_user1=!$status;
+            $m->status_user1=$status;
         }else{
             //cas utilisateur est id2
-            $m->status_user1=!$status;
+            $m->status_user2=$status;
         }
         $m->is_done=true;
         $m->save();
@@ -112,9 +112,9 @@ class Match extends Model
         $newMatch=new Match();        
         $newMatch->user_id1=Auth::id();
         $newMatch->user_id2=$newMatchUserId;
-        $newMatch->status_user1=!$status;
+        $newMatch->status_user1=$status;
         $newMatch->status_user2=false;
-        $newMatch->is_done=$status;
+        $newMatch->is_done=!$status;
         $newMatch->save();
     }
     public static function findATarget(){
