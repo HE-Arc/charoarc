@@ -26,53 +26,56 @@
             $request->validate(['id' => 'required|exists:App\Models\User,id']);
             $id = $request->input('id');
            
-            if ($request->has('inName')) 
+            if ($request->has('Name')) 
             {
-                $request->validate(['inName' => 'required|min:3|max:50']);
-                $name = $request->input('inName');
+                $request->validate(['Name' => 'required|min:3|max:50']);
+                $name = $request->input('Name');
                 User::updateUserName($id, $name);
             }
-            if ($request->has('inBirthday')) 
+            if ($request->has('Birthday')) 
             {
-                $request->validate(['inBirthday' => 'required|date']);
-                $birthday = $request->input('inBirthday');
+                $request->validate(['Birthday' => 'required|date']);
+                $birthday = $request->input('Birthday');
                 User::updateUserBirthday($id, $birthday);
             }
-            if ($request->has('inEmail')) 
+            if ($request->has('Email')) 
             {
-                $request->validate(['inEmail' => 'required|email|unique:users,email']);
-                $email = $request->input('inEmail');
+                $request->validate(['Email' => 'required|email|unique:users,email']);
+                $email = $request->input('Email');
                 User::updateUserEmail($id, $email);
             }
-            if ($request->has('inGender')) 
+            if ($request->has('Gender')) 
             {
-                $request->validate(['inGender' => 'required|string']);
-                $gender = $request->input('inGender');
+                $request->validate(['Gender' => 'required|string']);
+                $gender = $request->input('Gender');
                 User::updateUserGender($id, $gender);
             }
-            if ($request->has('inInteressedBy')) 
+            if ($request->has('InteressedBy')) 
             {
-                $request->validate(['inInteressedBy' => 'required|string']);
-                $interessedBy = $request->input('inInteressedBy');
+                $request->validate(['InteressedBy' => 'required|string']);
+                $interessedBy = $request->input('InteressedBy');
                 User::updateUserInteressedBy($id, $interessedBy);
             }
-            if ($request->has('inPassword', 'inConfirmePassword')) 
+            if ($request->has('Password', 'ConfirmePassword')) 
             {
                  $request->validate([
-                    'inPassword' => 'min:6|required_with:inConfirmePassword|same:inConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
-                    'inConfirmePassword' => 'min:6' ]);
-                $password = $request->input('inPassword');
-                $confirmePassword = $request->input('inConfirmePassword');
+                    'Password' => 'min:6|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
+                    'ConfirmePassword' => 'min:6' ]);
+                $password = $request->input('Password');
+                $confirmePassword = $request->input('ConfirmePassword');
                 User::updateUserPassword($id, $password);
             }
-            if ($request->hasFile('inImage'))
+            if ($request->hasFile('Image'))
             {
-                $request->validate(['inImage' => 'required|image|max:2048']);
-                $path = $request->inImage->store('public');
-                $image = $request->inImage->hashName();
+                $request->validate(['Image' => 'required|image|max:2048']);
+                $path = $request->Image->store('public');
+                $image = $request->Image->hashName();
                 //del old img
                 $user = User::getUserById($id);
-                Storage::delete('public/'. $user->image);
+                if($user->image != "defaultUser.jpg")
+                {
+                    Storage::delete('public/'. $user->image);
+                }
                 //update new img
                 User::updateUserImage($id, $image);
             }

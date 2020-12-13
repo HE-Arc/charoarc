@@ -131,6 +131,12 @@ class User extends Authenticatable
         return $response;
     }
 
+    public function getImage(){
+        if($this->image!=null)
+            return $this->image;
+        else
+        return 'defaultUser.jpg';
+    }
     
     /**
      * Age managment
