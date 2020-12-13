@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {  
         if (\App::environment() !== "local") 
         {
-            URL::forceScheme('http');
+            URL::forceScheme('https');
         }
     }
 }
