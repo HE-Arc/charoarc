@@ -64,6 +64,14 @@ class User extends Authenticatable  implements MustVerifyEmail
     }  
 
 
+    /***
+     * Display
+     */
+
+    public function asHTMLRowUnDislike(){
+        return 'je suis la';
+    }
+
     /**
      * UPDATER
      */
