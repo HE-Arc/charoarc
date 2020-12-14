@@ -47,13 +47,23 @@
         <form class="text-center" method="GET" action="{{route('matchs')}}">
             <input type ="submit" value="Refresh" style="background-color:yellow; border-radius: 9px;" ></input>
         </form>
+        
         @if(!empty($userMatchs))
+            <script type="text/javascript">
+                    $(document).ready(function() {
+                    $('[data-toggle="toggle"]').change(function(){
+                        $(this).parents().next('.hide').toggle();
+                        });
+                    });
+            </script>
             <table class="py-2 " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
-                <tr style="border-bottom: 5px solid #5b596e;">
-                <td>{{ __('Your Target') }}</td>
-                <td>{{ __('Status') }}</td>
-                <td></td>
-                </tr>
+                <thead>
+                    <tr style="border-bottom: 5px solid #5b596e;">
+                    <td>{{ __('Your Target') }}</td>
+                    <td>{{ __('Status') }}</td>
+                    <td></td>
+                    </tr>
+                </thead>
                 <?php  echo App\Models\Match::asHtmlTableRowAll($userMatchs);?>
             </table>
         @else

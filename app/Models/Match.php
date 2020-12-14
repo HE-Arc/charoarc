@@ -69,10 +69,29 @@ class Match extends Model
 
         $data=collect([]);
         $index=0;
+
         foreach($colAll as $c){
+            switch($index){
+                case 0 : 
+                    $val='Validated Matchs';break;
+                case 1 : 
+                    $val='Pending Matchs';break;
+                case 2 : 
+                    $val='Aborted Matchs';break;             
+            }
+            $data->push('
+            <tbody>
+            <td colspan="3">
+					<label for="namerow'.$index.'">'.$val.'</label>
+					<input type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle" checked>
+            </td>
+            </tbody>
+            <tbody class="hide" style="display:none">');
             foreach($c as $cIn){
+                
                 $data->push($cIn->asHtmlTableRowColor($cIn,$index));
             }
+            $data->push('</tbody>');
             $index++;
         }
         return implode('',$data->toArray());
@@ -89,7 +108,8 @@ class Match extends Model
         }
         if($singleMatch->toBeDisplayed(Auth::id()))
              if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
-                 return  '<tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 return  '
+                 <tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().'</td>
                  <td>        
@@ -101,7 +121,8 @@ class Match extends Model
                  </td>
                  </tr>';
              else
-                 return  '<tr  style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 return  '
+                 <tr  style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().'</td><td></td>
                  </tr>';
