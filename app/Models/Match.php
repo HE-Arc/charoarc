@@ -85,7 +85,7 @@ class Match extends Model
             <tbody>
             <td colspan="3">
 					<label for="namerow'.$index.'">'.$val.'</label>
-					<input type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
+					<input style="display:none; "type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
             </td>
             </tbody>
             <tbody class="hide" style="display:none">');
@@ -93,13 +93,13 @@ class Match extends Model
                 $style='';
                 if($cIn->user_id2 == Auth::id() && !$cIn->has_been_detail_id2){
                     $style=' padding: 1em;
-                    border: 1em solid yellow;
+                    border: 5px solid #e6f20c;
                     border-radius: 10px;';
                     $cIn->has_been_detail_id2=true;
                 }
                 else if($cIn->user_id1 == Auth::id() && !$cIn->has_been_detail_id1){
                     $style=' padding: 1em;
-                    border: 1em solid yellow;
+                    border: 5px solid #e6f20c;
                     border-radius: 10px;';
                     $cIn->has_been_detail_id1=true;
                 }
