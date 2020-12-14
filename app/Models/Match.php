@@ -52,35 +52,28 @@ class Match extends Model
 
             }
         }
-        $colValidated = $colValidated->sort(function ($a, $b) {
-            if ($a->updated_at == $b->updated_at) {
-                return 0;
-            }
-            return ($a->updated_at > $b->updated_at) ? -1 : 1;
-        });
-        $colPending = $colPending->sort(function ($a, $b) {
-            if ($a->updated_at == $b->updated_at) {
-                return 0;
-            }
-            return ($a->updated_at > $b->updated_at) ? -1 : 1;
-        });
-        $colAborted = $colAborted->sort(function ($a, $b) {
-            if ($a->updated_at == $b->updated_at) {
-                return 0;
-            }
-            return ($a->updated_at > $b->updated_at) ? -1 : 1;
-        });
+        
+        $colA=collect([$colValidated,$colPending,$colAborted]);
+        $colAll=collect([]);
 
+        $func =  function ($a, $b) {
+            if ($a->updated_at == $b->updated_at) {
+                return 0;
+            }
+            return ($a->updated_at > $b->updated_at) ? -1 : 1;
+        };
+
+        foreach($colA as $c){
+            $colAll->push($c->sort($func));
+        }
 
         $data=collect([]);
-        foreach($colValidated as $cV){
-            $data->push($cV->asHtmlTableRowColor($cV,0));
-        }
-        foreach($colPending as $cP){
-            $data->push($cP->asHtmlTableRowColor($cP,1));
-        }
-        foreach($colAborted as $cA){
-            $data->push($cA->asHtmlTableRowColor($cA,2));
+        $index=0;
+        foreach($colAll as $c){
+            foreach($c as $cIn){
+                $data->push($cIn->asHtmlTableRowColor($cIn,$index));
+            }
+            $index++;
         }
         return implode('',$data->toArray());
     }
