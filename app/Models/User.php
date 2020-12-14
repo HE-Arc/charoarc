@@ -29,6 +29,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone',
     ];
 
     /**
@@ -107,6 +108,12 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         $user = User::find($id);
         $user->image=$image;
+        $user->save();
+    }
+
+    public static function updatePhone($id,$phone){
+        $user = User::find($id);
+        $user->phone=$phone;
         $user->save();
     }
     /**

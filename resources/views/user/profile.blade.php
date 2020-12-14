@@ -27,7 +27,6 @@
                                         @endforeach
                                         <p></p>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>

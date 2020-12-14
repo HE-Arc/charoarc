@@ -74,6 +74,10 @@
                 $password = $request->input('Password');
                 User::updateUserPassword($id, $password);
             }
+            if($request->has('phone')){
+                $request->validate(['phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10']);
+                User::updatePhone($id,$request->input('phone'));
+            }
             if ($request->hasFile('Image'))
             {
                 $request->validate(['Image' => 'required|image|max:2048']);
