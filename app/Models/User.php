@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -29,6 +30,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone',
     ];
 
     /**
@@ -62,6 +64,27 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $user;
     }  
 
+
+
+    /**
+     * Tools
+     */
+
+    public static function getDislikedUsers(){
+        $id=Auth::id();
+        $userMatchs=Match::getAllMatchByUser($id);
+        $userDisliked=collect([]);
+
+        foreach($userMatchs as $m){
+            if($m->user_id1==$id && $m->status_user1==false && $m->is_done==true){
+                $userDisliked->push(User::getUserById($m->user_id2));
+            }
+            else if ($m->user_id2==$id && $m->status_user2==false && $m->is_done==true){
+                $userDisliked->push(User::getUserById($m->user_id1));
+            }
+        }
+        return $userDisliked;
+}
 
     /**
      * UPDATER
@@ -107,6 +130,12 @@ class User extends Authenticatable  implements MustVerifyEmail
     {
         $user = User::find($id);
         $user->image=$image;
+        $user->save();
+    }
+
+    public static function updatePhone($id,$phone){
+        $user = User::find($id);
+        $user->phone=$phone;
         $user->save();
     }
     /**

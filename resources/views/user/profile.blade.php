@@ -27,7 +27,6 @@
                                         @endforeach
                                         <p></p>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
@@ -42,7 +41,7 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'Name' => $Name ?? ''])}}">
                                         @csrf
                                         <x-label> Name :  {{ $user->name }}  </x-label>
-                                        <x-input id="Name" name="Name" placeholder="Nickname" required/>
+                                        <x-input class="text-center" id="Name" name="Name" placeholder="Nickname" required/>
                                         <br><x-button>Change</x-button>
                                     </form>
                                 </div>
@@ -83,7 +82,23 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'Email' => $Email ?? ''])}}">
                                         @csrf
                                         <x-label> Email :  {{ $user->email }}  </x-label>
-                                        <x-input type="email" id="Email" name="Email" placeholder="your@email.ch" required/>
+                                        <x-input class="text-center" type="email" id="Email" name="Email" placeholder="your@email.ch" required/>
+                                        <br><x-button class="pt-5">Change</x-button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                    <!-- change phone  -->
+                    <div class="py-3">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
+                                    <form  method="post" enctype="multipart/form-data" 
+                                        action="{{ route('updateMe', ['id' => $user->id, 'phone' => $phone ?? ''])}}">
+                                        @csrf
+                                        <x-label> Phone  :  {{ $user->phone }}  </x-label>
+                                        <x-input  class="text-center" id="phone" name="phone" placeholder="+336XXXXXXXX" required/>
                                         <br><x-button class="pt-5">Change</x-button>
                                     </form>
                                 </div>
@@ -99,7 +114,7 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'Birthday' => $Birthday ?? ''])}}">
                                         @csrf
                                         <x-label value=" Birthday : {{ $user->birthday }} ({{ $user->getAge($user->birthday)}} years old)"/>
-                                        <x-input type="date"  min='{{ $user->getMaxAge()}}' max='{{ $user->getMinAge()}}' id="Birthday" name="Birthday" placeholder="11/11/1111" required/>                      
+                                        <x-input class="text-center" type="date"  min='{{ $user->getMaxAge()}}' max='{{ $user->getMinAge()}}' id="Birthday" name="Birthday" placeholder="11/11/1111" required/>                      
                                         <br>   <x-button>Change</x-button>
                                     </form>
                                 </div>
@@ -164,11 +179,11 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'CurrentPassword' => $CurrentPassword ?? '','Password' => $Password ?? '', 'ConfirmePassword' => $ConfirmePassword ?? ''])}}">
                                         @csrf
                                         <x-label> Current password  </x-label>
-                                        <x-input type="password" id="CurrentPassword" name="CurrentPassword" placeholder="Current Password" required/>
+                                        <x-input class="text-center" type="password" id="CurrentPassword" name="CurrentPassword" placeholder="Current Password" required/>
                                         <x-label> New password  </x-label>
-                                        <x-input type="password" id="Password" name="Password" placeholder="New password" required/>
+                                        <x-input class="text-center" type="password" id="Password" name="Password" placeholder="New password" required/>
                                         <x-label> Confirm password  </x-label>
-                                        <x-input type="password" id="ConfirmePassword" name="ConfirmePassword" placeholder="Confirme password" required/>
+                                        <x-input class="text-center" type="password" id="ConfirmePassword" name="ConfirmePassword" placeholder="Confirme password" required/>
                                         <br><x-button>Change</x-button>
                                     </form>
                                 </div>

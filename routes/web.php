@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\UndislikeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -28,6 +29,9 @@ Route::get("/matchs",[MatchController::class, 'index'])->name("matchs");
 Route::post("/matchs/like", [MatchController::class, 'like'])->name("like")->middleware('verified');
 Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("dislike")->middleware('verified');
 Route::post("/matchs/details",[MatchController::class, 'details'])->name("details")->middleware('verified');
+
+Route::get("/matchs/undislike",[UndislikeController::class,'index'])->name('undislike')->middleware('verified');
+Route::post("/matchs/undislikeUpdate",[UndislikeController::class,'update'])->name('undislikeUpdate')->middleware('verified');
 
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");

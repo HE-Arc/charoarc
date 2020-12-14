@@ -75,7 +75,7 @@ class Match extends Model
         foreach($colAll as $c){
             switch($index){
                 case 0 : 
-                    $val='Show already validate Matchs';break;
+                    $val='Show already validated Matchs';break;
                 case 1 : 
                     $val='Show pending Matchs';break;
                 case 2 : 
@@ -183,7 +183,27 @@ class Match extends Model
         return 'Pending Match';
     } 
 
+    public function updateUnDislike(){
+        if($this->user_id1==Auth::id()){
+            $this->is_done=false;
+            $this->has_been_detail_id1;
+            $this->save();
+        }
+        else if($this->user_id2==Auth::id()){
+            $this->is_done=false;
+            $this->has_been_detail_id2;
+            $this->save();
+        }
+    }
+
     //static
+
+    public static function getMatchBy2UsersId($id1,$id2){
+        foreach(Match::allMatchs() as $m){
+            if(($m->user_id1==$id1 && $m->user_id2==$id2 ) || ($m->user_id1==$id2 && $m->user_id2==$id1 ))
+                return $m;
+        }
+    }
 
     public static function updateNotif($matchId){
         $m=Match::getMatchById($matchId);
@@ -311,7 +331,7 @@ class Match extends Model
             echo $oneMatchToAnswer->toString();
         }
 
-        return Collect([$userMatchs,$idToSend,$newMatchUserId,$image,$name]);
+        return collect([$userMatchs,$idToSend,$newMatchUserId,$image,$name]);
     }
 
 
