@@ -128,7 +128,7 @@ class Match extends Model
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
-                     <form method="POST" action="'.route('details').'">
+                     <form method="POST" action="'.route('undislike').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
                          <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
                          <input type ="submit" value="Details" class="bg-gray-400 " style=" border-radius: 9px;" ></input>
@@ -184,25 +184,6 @@ class Match extends Model
     } 
 
     //static
-
-    public static function getDislikedUsers(){
-            $id=Auth::id();
-            $userMatchs=Match::getAllMatchByUser($id);
-            $userDisliked=collect([]);
-
-            foreach($userMatchs as $m){
-                if($m->user_id1==$id && $m->status_user1==false && $m->is_done==true){
-                    //cas user1
-                    $userDisliked->push(User::getUserById($m->user_id2));
-                }
-                else if ($m->user_id2==$id && $m->status_user2==false && $m->is_done==true){
-                    //cas user 2
-                    $userDisliked->push(User::getUserById($m->user_id1));
-                }
-            }
-            return $userDisliked;
-    }
-
     public static function updateNotif($matchId){
         $m=Match::getMatchById($matchId);
         if($m->user_id2 == Auth::id() && !$m->has_been_detail_id2){
@@ -329,7 +310,7 @@ class Match extends Model
             echo $oneMatchToAnswer->toString();
         }
 
-        return Collect([$userMatchs,$idToSend,$newMatchUserId,$image,$name]);
+        return collect([$userMatchs,$idToSend,$newMatchUserId,$image,$name]);
     }
 
 

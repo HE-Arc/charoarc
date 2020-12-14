@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -64,13 +65,26 @@ class User extends Authenticatable  implements MustVerifyEmail
     }  
 
 
-    /***
-     * Display
+
+    /**
+     * Tools
      */
 
-    public function asHTMLRowUnDislike(){
-        return 'je suis la';
-    }
+    public static function getDislikedUsers(){
+        $id=Auth::id();
+        $userMatchs=Match::getAllMatchByUser($id);
+        $userDisliked=collect([]);
+
+        foreach($userMatchs as $m){
+            if($m->user_id1==$id && $m->status_user1==false && $m->is_done==true){
+                $userDisliked->push(User::getUserById($m->user_id2));
+            }
+            else if ($m->user_id2==$id && $m->status_user2==false && $m->is_done==true){
+                $userDisliked->push(User::getUserById($m->user_id1));
+            }
+        }
+        return $userDisliked;
+}
 
     /**
      * UPDATER

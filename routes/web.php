@@ -31,6 +31,7 @@ Route::post("/matchs/dislike", [MatchController::class, 'dislike'])->name("disli
 Route::post("/matchs/details",[MatchController::class, 'details'])->name("details")->middleware('verified');
 
 Route::get("/matchs/undislike",[UndislikeController::class,'index'])->name('undislike')->middleware('verified');
+Route::post("/matchs/undislikeUpdate",[UndislikeController::class,'update'])->name('undislikeUpdate')->middleware('verified');
 
 Route::post("/profile", [UserController::class, 'update'])->name("updateMe");
 Route::get('/profile', [UserController::class, 'profile'])->name("profile");
