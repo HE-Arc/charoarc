@@ -34,6 +34,7 @@ class MatchController extends Controller
         $matchId = $request->input('matchId');
         $user=Match::getMatchById($matchId)->getUserTargetFromIdLogged(Auth::id());
         $image=$user->getImage();
+        Match::updateNotif($matchId);
         $currentDate = new DateTime(); //Date actuelle format DateTime
         $bornDate = new DateTime($user->birthday)!=null?new DateTime($user->birthday):new DateTime(); //Date de naissance format EN depuis la BDD, dans un DateTime
         $age = date_diff($currentDate,  $bornDate)->format('%y'); //Format '%y' = seulement les années séparant les 2 dates

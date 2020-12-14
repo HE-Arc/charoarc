@@ -1,5 +1,5 @@
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100" >
+<nav x-data="{ open: false }" class="bg-gray-100 border-b border-gray-100" >
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 navbar-fixed-top" >
         <div class="flex justify-between h-16">
@@ -12,7 +12,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" >
                     <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
                         {{ __('CharoArc') }}
                     </x-nav-link>
@@ -37,31 +37,31 @@
                             </div>
                         </button>
                     </x-slot>
+                        <x-slot name="content">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
+                                    {{ __('CharoArc') }}
+                                </x-nav-link>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                                    {{ __('Account') }}
+                                </x-nav-link>
+                            </div>
+                        
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                    <x-slot name="content">
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
-                                {{ __('CharoArc') }}
-                            </x-nav-link>
-                        </div>
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link href="{{ route('profile') }}" :active="request()->routeIs('profile')">
-                                {{ __('Account') }}
-                            </x-nav-link>
-                        </div>
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Logout') }}
-                            </x-dropdown-link>
-                            
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+                                <x-dropdown-link href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                    {{ __('Logout') }}
+                                </x-dropdown-link>
+                                
+                            </form>
+                        </x-slot>
+                </x-dropdown> 
             </div>
 
             <!-- Hamburger -->
@@ -79,7 +79,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">    
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('matchs') }}" :active="request()->routeIs('matchs')">
-                {{ __('Home') }}
+                {{ __('CharoArc') }}
             </x-responsive-nav-link>
         </div>
     
