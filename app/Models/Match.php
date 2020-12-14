@@ -52,6 +52,26 @@ class Match extends Model
 
             }
         }
+        $colValidated = $colValidated->sort(function ($a, $b) {
+            if ($a->updated_at == $b->updated_at) {
+                return 0;
+            }
+            return ($a->updated_at > $b->updated_at) ? -1 : 1;
+        });
+        $colPending = $colPending->sort(function ($a, $b) {
+            if ($a->updated_at == $b->updated_at) {
+                return 0;
+            }
+            return ($a->updated_at > $b->updated_at) ? -1 : 1;
+        });
+        $colAborted = $colAborted->sort(function ($a, $b) {
+            if ($a->updated_at == $b->updated_at) {
+                return 0;
+            }
+            return ($a->updated_at > $b->updated_at) ? -1 : 1;
+        });
+
+
         $data=collect([]);
         foreach($colValidated as $cV){
             $data->push($cV->asHtmlTableRowColor($cV,0));
