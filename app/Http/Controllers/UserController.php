@@ -68,9 +68,9 @@
                     ]
                 ]);
                 $request->validate([
-                     'CurrentPassword'=>'min:6|required',
-                    'Password' => 'min:6|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
-                    'ConfirmePassword' => 'min:6' ]);
+                     'CurrentPassword'=>'min:6|max:30|required',
+                    'Password' => 'min:6|max:30|required_with:ConfirmePassword|same:ConfirmePassword',/*|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/*//* !!! we are all too lazy to apply this during an exercise !!!*/
+                    'ConfirmePassword' => 'min:6|max:30' ]);
                 $password = $request->input('Password');
                 User::updateUserPassword($id, $password);
             }

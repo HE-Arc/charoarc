@@ -126,7 +126,7 @@ class Match extends Model
                  return  '
                  <tr style="background-color:'.$color.';'.$style.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
-                 <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
+                 <td >'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
                      <form method="POST" action="'.route('details').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
