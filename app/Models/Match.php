@@ -90,8 +90,19 @@ class Match extends Model
             </tbody>
             <tbody class="hide" style="display:none">');
             foreach($c as $cIn){
+                $style='';
+                if($cIn->user_id2 == $cIn->getTargetUserId(Auth::id()) && !$cIn->has_been_detail_id1){
+                    $style=' padding: 1em;
+                    border: 1em solid yellow;
+                    border-radius: 10px;';
+                    $cIn->has_been_detail_id1=true;
+                }
+                else if($cIn->user_id1 == $cIn->getTargetUserId(Auth::id()) && !$cIn->has_been_detail_id2){
+                    $style='border: 10px solid yellow;';
+                    $cIn->has_been_detail_id2=true;
+                }
                 
-                $data->push($cIn->asHtmlTableRowColor($cIn,$index));
+                $data->push($cIn->asHtmlTableRowColor($cIn,$index,$style));
             }
             $data->push('</tbody>');
             $index++;
@@ -99,7 +110,7 @@ class Match extends Model
         return implode('',$data->toArray());
     }
 
-    public  function asHtmlTableRowColor($singleMatch,$colorId){
+    public  function asHtmlTableRowColor($singleMatch,$colorId,$style){
         switch($colorId){
             case 0 :$color='#02b030';
                 break;
@@ -111,7 +122,7 @@ class Match extends Model
         if($singleMatch->toBeDisplayed(Auth::id()))
              if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
                  return  '
-                 <tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 <tr style="background-color:'.$color.';'.$style.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
