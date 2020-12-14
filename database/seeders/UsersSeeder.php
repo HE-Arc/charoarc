@@ -72,6 +72,21 @@ class UsersSeeder extends Seeder
             $c->interessedBy='woman';
             $c->image = "defaultUser.jpg";
             $c->save();
+
+            $c=new User();
+            $c->name = "adrienutbm";
+            $c->email = "adrien.paysant@utbm.fr";
+            $c->password=bcrypt($c->name);
+            $tmpCarbonDate= Carbon::now();
+            $tmpCarbonDate = $tmpCarbonDate->sub(rand(20,25), 'Year');
+            $tmpCarbonDate = $tmpCarbonDate->sub(rand(1,12), 'Month');
+            $tmpCarbonDate = $tmpCarbonDate->sub(rand(1,27), 'Day');
+            $c->birthday=$tmpCarbonDate->toDateString();
+            $c->gender='woman';
+            $c->interessedBy='man';
+            $c->image = "defaultUser.jpg";
+            $c->save();
+
       
     }
 }
