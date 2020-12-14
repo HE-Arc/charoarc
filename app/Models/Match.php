@@ -42,10 +42,10 @@ class Match extends Model
                     case 'Match Validated':
                         $colValidated->push($m);
                         break;
-                    case 'Match Aborted':
+                    case 'Pending Match':
                         $colPending->push($m);
                         break;
-                    case 'Pending Match':
+                    case 'Match Aborted':
                         $colAborted->push($m);
                         break;       
                 }
@@ -74,9 +74,9 @@ class Match extends Model
             switch($index){
                 case 0 : 
                     $val='Show already validate Matchs';break;
-                case 2 : 
-                    $val='Show pending Matchs';break;
                 case 1 : 
+                    $val='Show pending Matchs';break;
+                case 2 : 
                     $val='Show aborted Matchs';break;             
             }
             $data->push('
@@ -101,9 +101,9 @@ class Match extends Model
         switch($colorId){
             case 0 :$color='#02b030';
                 break;
-            case 2:$color='#d68e09';
+            case 1:$color='#d68e09';
                 break;
-            case 1 :$color='#cc493f';
+            case 2 :$color='#cc493f';
                 break;
         }
         if($singleMatch->toBeDisplayed(Auth::id()))
