@@ -20,6 +20,8 @@ class Matchs extends Migration
             $table->boolean('status_user1');
             $table->boolean('status_user2');
             $table->boolean('is_done');
+            $table->boolean('has_been_detail_id1');
+            $table->boolean('has_been_detail_id2');
             $table->timestamps();
         });
     }

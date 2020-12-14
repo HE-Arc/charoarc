@@ -25,6 +25,8 @@ class Match extends Model
         'user_id2',
         'status_user1',
         'status_user2',
+        'has_been_detail_id1',
+        'has_been_detail_id2',
         'is_done',
     ];
 
@@ -81,15 +83,28 @@ class Match extends Model
             }
             $data->push('
             <tbody>
-            <td colspan="3">
+            <td class="bg-gray-300"colspan="3">
 					<label for="namerow'.$index.'">'.$val.'</label>
-					<input type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
+					<input style="display:none; "type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
             </td>
             </tbody>
             <tbody class="hide" style="display:none">');
             foreach($c as $cIn){
+                $style='';
+                if($cIn->user_id2 == Auth::id() && !$cIn->has_been_detail_id2){
+                    $style=' padding: 1em;
+                    border: 5px solid #ffffff;
+                    border-radius: 10px;';
+                    $cIn->has_been_detail_id2=true;
+                }
+                else if($cIn->user_id1 == Auth::id() && !$cIn->has_been_detail_id1){
+                    $style=' padding: 1em;
+                    border: 5px solid #ffffff;
+                    border-radius: 10px;';
+                    $cIn->has_been_detail_id1=true;
+                }
                 
-                $data->push($cIn->asHtmlTableRowColor($cIn,$index));
+                $data->push($cIn->asHtmlTableRowColor($cIn,$index,$style));
             }
             $data->push('</tbody>');
             $index++;
@@ -97,7 +112,7 @@ class Match extends Model
         return implode('',$data->toArray());
     }
 
-    public  function asHtmlTableRowColor($singleMatch,$colorId){
+    public  function asHtmlTableRowColor($singleMatch,$colorId,$style){
         switch($colorId){
             case 0 :$color='#02b030';
                 break;
@@ -109,14 +124,14 @@ class Match extends Model
         if($singleMatch->toBeDisplayed(Auth::id()))
              if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
                  return  '
-                 <tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 <tr style="background-color:'.$color.';'.$style.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
                      <form method="POST" action="'.route('details').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
                          <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
-                         <input type ="submit" value="Details" style="background-color:#42eb0e; border-radius: 9px;" ></input>
+                         <input type ="submit" value="Details" class="bg-gray-400 " style=" border-radius: 9px;" ></input>
                      </form>
                  </td>
                  </tr>';
@@ -170,6 +185,18 @@ class Match extends Model
 
     //static
 
+    public static function updateNotif($matchId){
+        $m=Match::getMatchById($matchId);
+        if($m->user_id2 == Auth::id() && !$m->has_been_detail_id2){
+            $m->has_been_detail_id2=true;
+        }
+        else if($m->user_id1 == Auth::id() && !$m->has_been_detail_id1){
+            $m->has_been_detail_id1=true;
+        }
+        $m->save();
+    }
+
+
     public static function updateByLikeOrDislike($matchId,$status){
         $m=Match::getMatchById($matchId);
         if( $m->user_id1==Auth::id()){
@@ -189,6 +216,8 @@ class Match extends Model
         $newMatch->user_id2=$newMatchUserId;
         $newMatch->status_user1=$status;
         $newMatch->status_user2=false;
+        $newMatch->has_been_detail_id1=false;
+        $newMatch->has_been_detail_id2=false;
         $newMatch->is_done=!$status;
         $newMatch->save();
     }

@@ -19,7 +19,7 @@
                         </form>
                     </td>
                     <td  style="width:auto;height:35%;margin:0 auto;">
-                        <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
+                        <img class="rounded" src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
                     </td>
                         <td >
                         <form method="POST" action="{{route('like')}}">
@@ -31,7 +31,7 @@
                         </td>
                 @else
                     <td  style="width:auto;height:40%;margin:0 auto;">
-                    <img src="{{__(asset( 'storage/default.png'))}}" alt="target image" >
+                    <img class="rounded" src="{{__(asset( 'storage/default.png'))}}" alt="target image" >
                     </td>
                 @endif
                 
@@ -56,7 +56,7 @@
                         });
                     });
             </script>
-            <table class="py-2 " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
+            <table class="py-2 bg-gray-400 rounded" style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
                 <thead>
                     <tr style="border-bottom: 5px solid #5b596e;">
                     <td>{{ __('Your Target') }}</td>

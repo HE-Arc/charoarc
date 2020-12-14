@@ -18,13 +18,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     </head>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen" style="--bg-opacity: 1;
+	background: rgb(180,131,189);
+	background: linear-gradient(225deg, rgba(180,131,189,1) 21%, rgba(116,222,244,1) 67%, rgba(192,160,205,1) 86%);">
     <body class="font-sans antialiased">
         
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="bg-white shadow">
+            <header class="bg-charoarc shadow" style="border-bottom:solid 2px lightgrey">
                 <div class="max-w-7xl mx-auto py-1 px-4 sm:px- lg:px-8">
                     {{ $header }}
                 </div>

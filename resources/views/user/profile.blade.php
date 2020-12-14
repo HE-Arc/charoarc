@@ -5,14 +5,16 @@
         </h2>
     </x-slot>
     <x-slot name="slot">     
-            <div class="text-center">
+            <div class="text-center" style="display: flex;
+    flex-wrap: wrap;
+    justify-content: center;">
 
                     <!-- message error -->
                 @if ($errors->any())
                     <div class="py-20 text-left">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;">
                                         <p></p>    
                                         <img src="{{ asset( 'storage/cross.png' ) }}" width="20%" height="auto">
@@ -34,8 +36,8 @@
                                     <!-- Change Name -->
                 <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Name' => $Name ?? ''])}}">
                                         @csrf
@@ -50,8 +52,8 @@
                                             <!-- Change Image -->
                 <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Image' => $Image ?? ''])}}">
                                         @csrf
@@ -75,8 +77,8 @@
                                             <!-- Change Email -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Email' => $Email ?? ''])}}">
                                         @csrf
@@ -91,8 +93,8 @@
                                         <!-- Change birthday -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Birthday' => $Birthday ?? ''])}}">
                                         @csrf
@@ -107,8 +109,8 @@
                                         <!-- Change Interessed by -->
                     <div class="py-3" >
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'InteressedBy' => $InteressedBy ?? ''])}}">
                                         @csrf
@@ -131,8 +133,8 @@
                                         <!-- Change Gender -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Gender' => $Gender ?? ''])}}">
                                         @csrf
@@ -156,8 +158,8 @@
                                                 <!-- Change Password -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
-                            <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'CurrentPassword' => $CurrentPassword ?? '','Password' => $Password ?? '', 'ConfirmePassword' => $ConfirmePassword ?? ''])}}">
                                         @csrf
