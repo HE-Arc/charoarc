@@ -23,12 +23,12 @@
                 <tbody>
                     @foreach($usersDisliked as $uD)
                     <tr style="display:flex; justify-content:space-around;padding-top: 1em;">
-                        <td >{{__($uD->name)}}</td>
+                        <td width="15%" style="overflow: hidden;">{{__($uD->name)}}</td>
                         <td style="display:flex; justify-content:space-around;
         text-align:center;padding-bottom: 1em;">
                             <img width="25%" height="auto" class="rounded" src="{{__(asset( 'storage/'. $uD->getImage()))}}" alt="target image" >
                         </td>
-                        <td>
+                        <td width="15%">
                             <form method="post" action="{{route('undislikeUpdate')}}">
                                @csrf
                                 <input type="hidden" name="userId" value="{{__($uD->id)}}"></input>
