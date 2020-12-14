@@ -83,7 +83,7 @@ class Match extends Model
             }
             $data->push('
             <tbody>
-            <td colspan="3">
+            <td class="bg-gray-300"colspan="3">
 					<label for="namerow'.$index.'">'.$val.'</label>
 					<input style="display:none; "type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
             </td>
@@ -93,13 +93,13 @@ class Match extends Model
                 $style='';
                 if($cIn->user_id2 == Auth::id() && !$cIn->has_been_detail_id2){
                     $style=' padding: 1em;
-                    border: 5px solid #e6f20c;
+                    border: 5px solid #ffffff;
                     border-radius: 10px;';
                     $cIn->has_been_detail_id2=true;
                 }
                 else if($cIn->user_id1 == Auth::id() && !$cIn->has_been_detail_id1){
                     $style=' padding: 1em;
-                    border: 5px solid #e6f20c;
+                    border: 5px solid #ffffff;
                     border-radius: 10px;';
                     $cIn->has_been_detail_id1=true;
                 }
@@ -131,7 +131,7 @@ class Match extends Model
                      <form method="POST" action="'.route('details').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
                          <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
-                         <input type ="submit" value="Details" style="background-color:#42eb0e; border-radius: 9px;" ></input>
+                         <input type ="submit" value="Details" class="bg-gray-400 " style=" border-radius: 9px;" ></input>
                      </form>
                  </td>
                  </tr>';
