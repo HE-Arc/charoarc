@@ -91,15 +91,17 @@ class Match extends Model
             <tbody class="hide" style="display:none">');
             foreach($c as $cIn){
                 $style='';
-                if($cIn->user_id2 == $cIn->getTargetUserId(Auth::id()) && !$cIn->has_been_detail_id1){
+                if($cIn->user_id2 == Auth::id() && !$cIn->has_been_detail_id2){
+                    $style=' padding: 1em;
+                    border: 1em solid yellow;
+                    border-radius: 10px;';
+                    $cIn->has_been_detail_id2=true;
+                }
+                else if($cIn->user_id1 == Auth::id() && !$cIn->has_been_detail_id1){
                     $style=' padding: 1em;
                     border: 1em solid yellow;
                     border-radius: 10px;';
                     $cIn->has_been_detail_id1=true;
-                }
-                else if($cIn->user_id1 == $cIn->getTargetUserId(Auth::id()) && !$cIn->has_been_detail_id2){
-                    $style='border: 10px solid yellow;';
-                    $cIn->has_been_detail_id2=true;
                 }
                 
                 $data->push($cIn->asHtmlTableRowColor($cIn,$index,$style));
@@ -182,6 +184,18 @@ class Match extends Model
     } 
 
     //static
+
+    public static function updateNotif($matchId){
+        $m=Match::getMatchById($matchId);
+        if($m->user_id2 == Auth::id() && !$m->has_been_detail_id2){
+            $m->has_been_detail_id2=true;
+        }
+        else if($m->user_id1 == Auth::id() && !$m->has_been_detail_id1){
+            $m->has_been_detail_id1=true;
+        }
+        $m->save();
+    }
+
 
     public static function updateByLikeOrDislike($matchId,$status){
         $m=Match::getMatchById($matchId);
