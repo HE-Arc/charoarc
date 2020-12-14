@@ -75,7 +75,7 @@ class Match extends Model
         foreach($colAll as $c){
             switch($index){
                 case 0 : 
-                    $val='Show already validate Matchs';break;
+                    $val='Show already validated Matchs';break;
                 case 1 : 
                     $val='Show pending Matchs';break;
                 case 2 : 
