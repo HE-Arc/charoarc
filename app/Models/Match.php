@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\MatchController;
+use Illuminate\Support\Collection;
 
 class Match extends Model
 {
@@ -31,6 +31,68 @@ class Match extends Model
     public function toString(){
         return  'user_id1 : '.$this->user_id1.' user_id2 : '.$this->user_id2.' status_user1 : '.$this->status_user1.' status_user2 : '.$this->status_user2.' is_done : '.$this->is_done;
     }
+
+    public static function asHtmlTableRowAll($userMatchs){
+        $colValidated=collect([]);
+        $colPending=collect([]);
+        $colAborted=collect([]);
+        foreach($userMatchs as $m){
+            if($m->toBeDisplayed(Auth::id())){
+                switch($m->getMatchTextStatus()){
+                    case 'Match Validated':
+                        $colValidated->push($m);
+                        break;
+                    case 'Match Aborted':
+                        $colPending->push($m);
+                        break;
+                    case 'Pending Match':
+                        $colAborted->push($m);
+                        break;       
+                }
+
+            }
+        }
+        $data=collect([]);
+        foreach($colValidated as $cV){
+            $data->push($cV->asHtmlTableRowColor($cV,0));
+        }
+        foreach($colPending as $cP){
+            $data->push($cP->asHtmlTableRowColor($cP,1));
+        }
+        foreach($colAborted as $cA){
+            $data->push($cA->asHtmlTableRowColor($cA,2));
+        }
+        return implode('',$data->toArray());
+    }
+
+    public  function asHtmlTableRowColor($singleMatch,$colorId){
+        switch($colorId){
+            case 0 :$color='#02b030';
+                break;
+            case 1:$color='#d68e09';
+                break;
+            case 2 :$color='#cc493f';
+                break;
+        }
+        if($singleMatch->toBeDisplayed(Auth::id()))
+             if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
+                 return  '<tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
+                 <td>'.$singleMatch->getMatchTextStatus().'</td>
+                 <td>        
+                     <form method="POST" action="'.route('details').'">
+                         <input type="hidden" name="_token" value="'.csrf_token().'" />
+                         <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
+                         <input type ="submit" value="Details" style="background-color:lightblue; border-radius: 9px;" ></input>
+                     </form>
+                 </td>
+                 </tr>';
+             else
+                 return  '<tr  style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
+                 <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
+                 <td>'.$singleMatch->getMatchTextStatus().'</td><td></td>
+                 </tr>';
+     }
 
     public  function asHtmlTableRow($singleMatch){
        if($singleMatch->toBeDisplayed(Auth::id()))
@@ -86,7 +148,7 @@ class Match extends Model
     }
 
     public  function getMatchTextStatus(){
-        if($this->status_user2==1 && $this->status_user1==1)
+        if($this->status_user2==1 && $this->status_user1==1 && $this->is_done==1)
             return 'Match Validated';
         if($this->is_done==1 && ($this->status_user2==0 || $this->status_user1==0))
             return 'Match Aborted';

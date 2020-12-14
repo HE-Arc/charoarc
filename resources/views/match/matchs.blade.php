@@ -54,10 +54,7 @@
                 <td>{{ __('Status') }}</td>
                 <td></td>
                 </tr>
-                @foreach($userMatchs as $singleMatch)
-                    <?php echo $singleMatch->asHtmlTableRow($singleMatch);?>
-                @endforeach 
-                
+                <?php  echo App\Models\Match::asHtmlTableRowAll($userMatchs);?>
             </table>
         @else
             <p class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6" 
