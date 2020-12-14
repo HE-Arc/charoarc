@@ -31,7 +31,7 @@
                         <td>
                             <form method="post" action="{{route('undislikeUpdate')}}">
                                @csrf
-                                <input type="hidden" name="userId" value="'.$this->id.'"></input>
+                                <input type="hidden" name="userId" value="{{__($uD->id)}}"></input>
                                 <input type ="submit" value="Revert" style="color:white;background-color: #342f61; border-radius: 9px;" ></input>
                             </form>
                         </td>

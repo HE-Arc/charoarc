@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Match;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class UndislikeController extends Controller
     }
     public function update(Request $request){
         $request->validate([['userId' => 'required|exists:App\Models\User,id'],]);
-        
+        $match=Match::getMatchBy2UsersId($request->input('userId'),Auth::id());
+        $match->updateUnDislike();
         return view('match.undislike',['usersDisliked'=>User::getDislikedUsers()]);
     }
 }

@@ -128,7 +128,7 @@ class Match extends Model
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
                  <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
-                     <form method="POST" action="'.route('undislike').'">
+                     <form method="POST" action="'.route('details').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
                          <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
                          <input type ="submit" value="Details" class="bg-gray-400 " style=" border-radius: 9px;" ></input>
@@ -183,7 +183,28 @@ class Match extends Model
         return 'Pending Match';
     } 
 
+    public function updateUnDislike(){
+        if($this->user_id1==Auth::id()){
+            $this->is_done=false;
+            $this->has_been_detail_id1;
+            $this->save();
+        }
+        else if($this->user_id2==Auth::id()){
+            $this->is_done=false;
+            $this->has_been_detail_id2;
+            $this->save();
+        }
+    }
+
     //static
+
+    public static function getMatchBy2UsersId($id1,$id2){
+        foreach(Match::allMatchs() as $m){
+            if(($m->user_id1==$id1 && $m->user_id2==$id2 ) || ($m->user_id1==$id2 && $m->user_id2==$id1 ))
+                return $m;
+        }
+    }
+
     public static function updateNotif($matchId){
         $m=Match::getMatchById($matchId);
         if($m->user_id2 == Auth::id() && !$m->has_been_detail_id2){
