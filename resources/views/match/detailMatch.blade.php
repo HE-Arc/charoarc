@@ -18,6 +18,7 @@
                     <tr><td>Age : {{$age}}</td></tr>
                     <tr><td>Matched on : {{$date}}</td></tr>
                     <tr><td>Email : {{$mail}}</td></tr>
+                    <tr><td>Phone : {{$phone}}</td></tr>
                     </table>        
                 </td>
             </tr>

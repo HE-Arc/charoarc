@@ -39,8 +39,9 @@ class MatchController extends Controller
         $bornDate = new DateTime($user->birthday)!=null?new DateTime($user->birthday):new DateTime(); //Date de naissance format EN depuis la BDD, dans un DateTime
         $age = date_diff($currentDate,  $bornDate)->format('%y'); //Format '%y' = seulement les années séparant les 2 dates
         $age=$age==0?'Age unknow':$age;
+        $phone=$user->phone==null?'Phone unknow':$user->phone;
         $date=Match::getMatchById($matchId)->updated_at;
-        return view('match.detailMatch', ['name'=>$user->name,'image'=>$image,'date'=>$date,'age'=>$age,'mail'=>$user->email],);
+        return view('match.detailMatch', ['name'=>$user->name,'image'=>$image,'date'=>$date,'phone'=>$phone,'age'=>$age,'mail'=>$user->email],);
     }
     
 
