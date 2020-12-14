@@ -25,6 +25,8 @@ class Match extends Model
         'user_id2',
         'status_user1',
         'status_user2',
+        'has_been_detail_id1',
+        'has_been_detail_id2',
         'is_done',
     ];
 
@@ -189,6 +191,8 @@ class Match extends Model
         $newMatch->user_id2=$newMatchUserId;
         $newMatch->status_user1=$status;
         $newMatch->status_user2=false;
+        $newMatch->has_been_detail_id1=false;
+        $newMatch->has_been_detail_id2=false;
         $newMatch->is_done=!$status;
         $newMatch->save();
     }
