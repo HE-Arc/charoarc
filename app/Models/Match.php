@@ -73,17 +73,17 @@ class Match extends Model
         foreach($colAll as $c){
             switch($index){
                 case 0 : 
-                    $val='Validated Matchs';break;
-                case 1 : 
-                    $val='Pending Matchs';break;
+                    $val='Show already validate Matchs';break;
                 case 2 : 
-                    $val='Aborted Matchs';break;             
+                    $val='Show pending Matchs';break;
+                case 1 : 
+                    $val='Show aborted Matchs';break;             
             }
             $data->push('
             <tbody>
             <td colspan="3">
 					<label for="namerow'.$index.'">'.$val.'</label>
-					<input type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle" checked>
+					<input type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
             </td>
             </tbody>
             <tbody class="hide" style="display:none">');
@@ -101,9 +101,9 @@ class Match extends Model
         switch($colorId){
             case 0 :$color='#02b030';
                 break;
-            case 1:$color='#d68e09';
+            case 2:$color='#d68e09';
                 break;
-            case 2 :$color='#cc493f';
+            case 1 :$color='#cc493f';
                 break;
         }
         if($singleMatch->toBeDisplayed(Auth::id()))
@@ -111,12 +111,12 @@ class Match extends Model
                  return  '
                  <tr style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
-                 <td>'.$singleMatch->getMatchTextStatus().'</td>
+                 <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td>
                  <td>        
                      <form method="POST" action="'.route('details').'">
                          <input type="hidden" name="_token" value="'.csrf_token().'" />
                          <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
-                         <input type ="submit" value="Details" style="background-color:lightblue; border-radius: 9px;" ></input>
+                         <input type ="submit" value="Details" style="background-color:#42eb0e; border-radius: 9px;" ></input>
                      </form>
                  </td>
                  </tr>';
@@ -124,30 +124,9 @@ class Match extends Model
                  return  '
                  <tr  style="background-color:'.$color.'" class="py-3 p-6 border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
                  <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
-                 <td>'.$singleMatch->getMatchTextStatus().'</td><td></td>
+                 <td>'.$singleMatch->getMatchTextStatus().' on '.$singleMatch->updated_at.'</td><td></td>
                  </tr>';
      }
-
-    public  function asHtmlTableRow($singleMatch){
-       if($singleMatch->toBeDisplayed(Auth::id()))
-            if($singleMatch->is_done && $singleMatch->status_user1 && $singleMatch->status_user2)
-                return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
-                <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
-                <td>'.$singleMatch->getMatchTextStatus().'</td>
-                <td>        
-                    <form method="POST" action="'.route('details').'">
-                        <input type="hidden" name="_token" value="'.csrf_token().'" />
-                        <input type="hidden" name="matchId" value="'.$singleMatch->id.'"></input>
-                        <input type ="submit" value="Details" style="background-color:lightblue; border-radius: 9px;" ></input>
-                    </form>
-                </td>
-                </tr>';
-            else
-                return  '<tr class="py-3 p-6 bg-white border-b border-gray-200 overflow-hidden shadow-md sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-6">
-                <td>'.$singleMatch->getUserNameTargetFromIdLogged(Auth::id()).'</td>
-                <td>'.$singleMatch->getMatchTextStatus().'</td>
-                </tr>';
-    }
 
     public function getUserNameTargetFromIdLogged($userId){
         if($userId==$this->user_id2)
