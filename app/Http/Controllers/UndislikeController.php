@@ -18,6 +18,7 @@ class UndislikeController extends Controller
         $request->validate([['userId' => 'required|exists:App\Models\User,id'],]);
         $match=Match::getMatchBy2UsersId($request->input('userId'),Auth::id());
         $match->updateUnDislike();
-        return view('match.undislike',['usersDisliked'=>User::getDislikedUsers()]);
+        $request->session()->flash('alert-success', 'User Dislike Reverted !');
+        return redirect()->route('undislike');
     }
 }
