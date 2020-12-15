@@ -6,6 +6,20 @@
     </x-slot>
     <x-slot name="slot"> 
     @if(Auth::check())
+        <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+            <script type="text/javascript">
+                $(document).ready(function(){
+                setTimeout(function(){$("#message").hide();}, 2500);});
+            </script>
+            <div id="message" style="display:flex; justify-content:space-around;
+            text-align:center;color : white; background-color : purple">
+            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+            </div>
+            @endif
+        @endforeach
+        </div> <!-- end .flash-message -->
         @if(!empty($usersDisliked->toArray()))
             <table class="py-2 bg-gray-400 rounded " style="text-align:center;margin:auto; width:95%;margin-top: 5%;  box-shadow: 8px 8px 12px #5b596e;">
                <thead>
