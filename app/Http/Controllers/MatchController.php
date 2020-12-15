@@ -50,6 +50,7 @@ class MatchController extends Controller
         $matchId = $request->input('matchToAnswerId');
         $newMatchUserId = $request->input('newMatchUserId');
         MatchController::likeOrDislike($matchId,$newMatchUserId,true);
+        $request->session()->flash('alert-success', 'User Liked ! ');
        return redirect()->route('matchs');
     }
     public function dislike(Request $request){
@@ -57,6 +58,7 @@ class MatchController extends Controller
         $matchId = $request->input('matchToAnswerId');
         $newMatchUserId = $request->input('newMatchUserId');
         MatchController::likeOrDislike($matchId,$newMatchUserId,false);
+        $request->session()->flash('alert-success', 'User Disliked ! ');
         return redirect()->route('matchs');
     }
 
