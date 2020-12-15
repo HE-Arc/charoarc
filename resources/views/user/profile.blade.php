@@ -4,11 +4,27 @@
             {{ __('Profile') }}
         </h2>
     </x-slot>
-    <x-slot name="slot">     
-            <div class="text-center" style="display: flex;
+    <x-slot name="slot">   
+        <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                        setTimeout(function(){$("#message").hide();}, 2500);});
+                    </script>
+                    <div id="message" style="display:flex; justify-content:space-around;
+                    text-align:center;color : white; background-color : purple">
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+                    </div>
+                    @endif
+                @endforeach
+        </div> <!-- end .flash-message -->
+        <div class="text-center" style="display: flex;
     flex-wrap: wrap;
     justify-content: center;">
 
+
+            
                     <!-- message error -->
                 @if ($errors->any())
                     <div class="py-20 text-left">
@@ -98,7 +114,7 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'phone' => $phone ?? ''])}}">
                                         @csrf
                                         <x-label> Phone  :  {{ $user->phone }}  </x-label>
-                                        <x-input  class="text-center" id="phone" name="phone" placeholder="+336XXXXXXXX" required/>
+                                        <x-input  class="text-center" id="phone" name="phone" placeholder="+417XXXXXXXX" required/>
                                         <br><x-button class="pt-5">Change</x-button>
                                     </form>
                                 </div>

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth-card-welcom>
     <div class="text-center"><h2>Welcome back on CharoArc</h2></div>
         <x-slot name="logo">
             <a href="/" class="text-center">
@@ -44,7 +44,7 @@
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}" style="padding-right:5%;">
-                        {{ __('New ? Let\'s register !') }}
+                        {{ __('CREATE NEW ACCOUNT !') }}
                     </a>
                     
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
@@ -58,5 +58,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-auth-card-welcom>
 </x-guest-layout>
