@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-auth-card>
+    <x-auth-card-welcom>
         <x-slot name="logo">
         
             <a href="/">
@@ -55,5 +55,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-auth-card-welcom>
 </x-guest-layout>
