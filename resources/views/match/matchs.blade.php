@@ -12,7 +12,7 @@
          @if(Session::has('alert-' . $msg))
          <script type="text/javascript">
             $(document).ready(function(){
-            setTimeout(function(){$("#message").hide();}, 5000);});
+            setTimeout(function(){$("#message").hide();}, 2500);});
          </script>
         <div id="message" style="display:flex; justify-content:space-around;
         text-align:center;color : white; background-color : purple">
