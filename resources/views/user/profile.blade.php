@@ -114,7 +114,7 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'phone' => $phone ?? ''])}}">
                                         @csrf
                                         <x-label> Phone  :  {{ $user->phone }}  </x-label>
-                                        <x-input  class="text-center" id="phone" name="phone" placeholder="+336XXXXXXXX" required/>
+                                        <x-input  class="text-center" id="phone" name="phone" placeholder="+417XXXXXXXX" required/>
                                         <br><x-button class="pt-5">Change</x-button>
                                     </form>
                                 </div>
