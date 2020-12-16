@@ -43,7 +43,7 @@
                         @if($uD->getImage()!=null)
                             <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/'. $uD->getImage()))}}" alt="target image" >
                         @else
-                        <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/defaultUser.jpg')}}" alt="target image" >
+                        <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/defaultUser.jpg'))}}" alt="target image" >
                         @endif
                         </td>
                         <td width="15%">
