@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 class MatchController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * return the matches page view with data to display.
      */
     public function index()
     {
@@ -29,6 +27,10 @@ class MatchController extends Controller
             }
             return redirect()->route('login');
     }
+
+    /**
+     * return the detail view of a match
+     */
     public static function details(Request $request){
         $request->validate([['matchId' => 'required|exists:App\Models\Match,id'],]); 
         $matchId = $request->input('matchId');
@@ -46,6 +48,9 @@ class MatchController extends Controller
     }
     
 
+    /**
+     * controller to like 
+     */
     public function like(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]); 
         $matchId = $request->input('matchToAnswerId');
@@ -54,6 +59,10 @@ class MatchController extends Controller
         $request->session()->flash('alert-success', 'User Liked ! ');
        return redirect()->route('matchs');
     }
+
+    /**
+     * controller to dislike 
+     */
     public function dislike(Request $request){
         $request->validate([['matchToAnswerId' => 'required|exists:App\Models\Match,id'],['newMatchUserId' => 'required|exists:App\Models\Match,id']]);
         $matchId = $request->input('matchToAnswerId');
@@ -63,6 +72,9 @@ class MatchController extends Controller
         return redirect()->route('matchs');
     }
 
+    /**
+     * function to dry some code
+     */
     public static function likeOrDislike($matchId,$newMatchUserId,$bool){
         if($matchId!=null){
             //match existant

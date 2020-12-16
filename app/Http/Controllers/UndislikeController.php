@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 
 class UndislikeController extends Controller
 {
+    /**
+     * return the undislike view with parameters to display.
+     */
     public function index()
     {
         if(Auth::check())
             return view('match.undislike',['usersDisliked'=>User::getDislikedUsers()]);
         return redirect()->route('login');
     }
+
+    /**
+     * update to remove a dislike
+     */
     public function update(Request $request){
         $request->validate([['userId' => 'required|exists:App\Models\User,id'],]);
         $match=Match::getMatchBy2UsersId($request->input('userId'),Auth::id());
