@@ -102,11 +102,13 @@
                 $request->validate(['Image' => 'required|image|max:10240']);
                 $path = $request->Image->store('public');
                 $image = $request->Image->hashName();
+
                 //del old img
                 $user = User::getUserById($id);
                 if($user->image != "defaultUser.jpg") {
                     Storage::delete('public/'. $user->image);
                 }
+
                 //update new img
                 $request->session()->flash('alert-success', 'Picture updated !');
                 User::updateUserImage($id, $image);
