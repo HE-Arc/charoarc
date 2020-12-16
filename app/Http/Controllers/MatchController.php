@@ -40,8 +40,9 @@ class MatchController extends Controller
         $age = date_diff($currentDate,  $bornDate)->format('%y'); //Format '%y' = seulement les années séparant les 2 dates
         $age=$age==0?'Age unknow':$age;
         $phone=$user->phone==null?' unknow':$user->phone;
+        $description=$user->description==null?' unknow':$user->description;
         $date=Match::getMatchById($matchId)->updated_at;
-        return view('match.detailMatch', ['name'=>$user->name,'image'=>$image,'date'=>$date,'phone'=>$phone,'age'=>$age,'mail'=>$user->email],);
+        return view('match.detailMatch', ['name'=>$user->name,'description'=>$description,'image'=>$image,'date'=>$date,'phone'=>$phone,'age'=>$age,'mail'=>$user->email],);
     }
     
 

@@ -43,6 +43,13 @@
                 $request->session()->flash('alert-success', 'Birthday updated !');
                 User::updateUserBirthday($id, $birthday);
             }
+            if ($request->has('description')) 
+            {
+                $request->validate(['description' => 'required|string|max:140']);
+                $description = $request->input('description');
+                $request->session()->flash('alert-success', 'Description updated !');
+                User::updateUserDescription($id, $description);
+            }
             if ($request->has('Email')) 
             {
                 $request->validate(['Email' => 'required|email|unique:users,email']);

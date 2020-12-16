@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->string('interessedBy')->nullable();
             $table->string('image')->nullable();
+            $table->string('description')->nullable();
         });
     }
 

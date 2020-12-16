@@ -75,11 +75,11 @@ class Match extends Model
         foreach($colAll as $c){
             switch($index){
                 case 0 : 
-                    $val='Show already validated Matchs';break;
+                    $val='Show already validated Matches';break;
                 case 1 : 
-                    $val='Show pending Matchs';break;
+                    $val='Show pending Matches';break;
                 case 2 : 
-                    $val='Show aborted Matchs';break;             
+                    $val='Show aborted Matches';break;             
             }
             $data->push('
             <tbody>
