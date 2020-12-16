@@ -37,10 +37,10 @@
                 <tbody>
                     @foreach($usersDisliked as $uD)
                     <tr style="display:flex; justify-content:space-around;padding-top: 1em;">
-                        <td width="15%" style="overflow: hidden;">{{__($uD->name)}}</td>
-                        <td style="display:flex; justify-content:space-around;
-        text-align:center;padding-bottom: 1em;">
-                            <img width="25%" height="auto" class="rounded" src="{{__(asset( 'storage/'. $uD->getImage()))}}" alt="target image" >
+                        <td  style="overflow: hidden;width:15%;">{{__($uD->name)}}</td>
+                        <td style="display:flex; justify-content:center;
+        text-align:center;padding-bottom: 1em;width:15%;">
+                            <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/'. $uD->getImage()))}}" alt="target image" >
                         </td>
                         <td width="15%">
                             <form method="post" action="{{route('undislikeUpdate')}}">
