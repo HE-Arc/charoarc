@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+/**
+ * Gender
+ * list of const of gender
+ */
 class Gender
 {
     public const WOMAN = "woman";

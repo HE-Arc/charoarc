@@ -8,6 +8,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 
+
+/**
+ * Match model
+ */
 class Match extends Model
 {
     use HasFactory;

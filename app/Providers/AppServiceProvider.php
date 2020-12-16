@@ -13,10 +13,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
-    }
+    public function register() {}
 
     /**
      * Bootstrap any application services.
@@ -25,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {  
-        if (\App::environment() !== "local") 
-        {
+        //if app in production change all request to https
+        if (\App::environment() !== "local") {
             URL::forceScheme('https');
         }
     }
