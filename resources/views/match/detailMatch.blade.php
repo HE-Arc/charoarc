@@ -7,10 +7,10 @@
     <x-slot name="slot"> 
     @if(Auth::check())
         <table class="py-2 " style="display:flex;flex-wrap: wrap; justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
-            <tr>
+            <tr>   
                     <td  style="width:50%;height:auto;margin:0 auto;">
-                        <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
-                    </td>        
+                        <img class="rounded"  src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="width: 100%;height: auto;">
+                    </td>     
                     <td>
                     <table class="py-2 " style="text-align:center;margin:auto;width:45%;margin-top: 5%; ">
                     <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
