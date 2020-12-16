@@ -6,32 +6,28 @@
     </x-slot>
     <x-slot name="slot"> 
     @if(Auth::check())
-        <table class="py-2 " style="justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
-            <tr style="display:flex;flex-wrap: wrap;">
+        <table class="py-2 " style="display:flex;flex-wrap: wrap; justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
+            <tr>
                     <td  style="width:50%;height:auto;margin:0 auto;">
                         <img src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
-                    </td>   
-                    <div style="justify-content:space-around;text-align:center;"> 
-                        <div></div>
-                        <td>
-                            <table class="py-2 " style="text-align:center;margin:auto;width:45%;margin-top: 5%; ">
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                Name : {{$name}}</td></tr>
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                Age : {{$age}}</td></tr>
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                <div style="text-align:center;width:fit-content; width:auto;" >Description : <br>{{$description}}</div>
-                            </td></tr>
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                Matched on : {{$date}}</td></tr>
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                Email : {{$mail}}</td></tr>
-                            <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                                Phone : {{$phone}}</td></tr>
-                            </table>        
-                        </td>
-                        <div></div>
-                </div>    
+                    </td>        
+                    <td>
+                    <table class="py-2 " style="text-align:center;margin:auto;width:45%;margin-top: 5%; ">
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        Name : {{$name}}</td></tr>
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        Age : {{$age}}</td></tr>
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        <div style="text-align:center;width:fit-content; width:auto;" >Description : <br>{{$description}}</div>
+                    </td></tr>
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        Matched on : {{$date}}</td></tr>
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        Email : {{$mail}}</td></tr>
+                    <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
+                        Phone : {{$phone}}</td></tr>
+                    </table>        
+                </td>
             </tr>
         </table>
         <form class="text-center" method="GET" action="{{route('matchs')}}">
