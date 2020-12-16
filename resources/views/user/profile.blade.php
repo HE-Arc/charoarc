@@ -77,9 +77,9 @@
                                         <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
                                             @if(!empty($user->image))
-                                                <img src="{{ asset( 'storage/' . $user->image ) }}"  width="20%" height="auto">
+                                                <img src="{{ asset( 'storage/' . $user->image ) }}" style="width:20%;height:auto">
                                             @else
-                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="20%" height="auto">
+                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" style="width:20%;height:auto">
                                             @endif <div></div>
                                         </div>
                                         <x-input  type="file" id="Image" name="Image" />
