@@ -40,11 +40,7 @@
                         <td  style="overflow: hidden;width:15%;">{{__($uD->name)}}</td>
                         <td style="display:flex; justify-content:center;
         text-align:center;padding-bottom: 1em;width:15%;">
-                        @if($uD->getImage()!=null)
                             <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/'. $uD->getImage()))}}" alt="target image" >
-                        @else
-                        <img style="width:30%; height:auto" class="rounded" src="{{__(asset( 'storage/defaultUser.jpg')}}" alt="target image" >
-                        @endif
                         </td>
                         <td width="15%">
                             <form method="post" action="{{route('undislikeUpdate')}}">
