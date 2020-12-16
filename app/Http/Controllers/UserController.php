@@ -94,7 +94,7 @@
             }
             if ($request->hasFile('Image'))
             {
-                $request->validate(['Image' => 'required|image|max:2048']);
+                $request->validate(['Image' => 'required|image|max:10240']);
                 $path = $request->Image->store('public');
                 $image = $request->Image->hashName();
                 //del old img
