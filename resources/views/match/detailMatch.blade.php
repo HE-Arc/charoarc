@@ -9,7 +9,7 @@
         <table class="py-2 " style="display:flex;flex-wrap: wrap; justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
             <tr>   
                     <td  style="width:50%;height:auto;margin:0 auto;">
-                        <img class="rounded"  src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="width: 100%;height: auto;">
+                        <img class="rounded"  src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="width: auto;height: 40%;">
                     </td>     
                     <td>
                     <table class="py-2 " style="text-align:center;margin:auto;width:45%;margin-top: 5%; ">
