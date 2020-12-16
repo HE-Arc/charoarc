@@ -88,7 +88,7 @@ class Match extends Model
 					<input style="display:none; "type="checkbox" name="namerow'.$index.'" id="namerow'.$index.'" data-toggle="toggle">
             </td>
             </tbody>
-            <tbody class="hide" style="display:none">');
+            <tbody class="hide" >');
             foreach($c as $cIn){
                 $style='';
                 if($cIn->user_id2 == Auth::id() && !$cIn->has_been_detail_id2){
