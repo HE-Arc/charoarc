@@ -74,7 +74,7 @@
                                         @csrf
                                         <x-label> Picture : </x-label>
                                        
-                                        <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
+                                        <div style="width:25%; display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
                                             @if(!empty($user->image))
                                                 <img src="{{ asset( 'storage/' . $user->image ) }}" style="width:20%;height:auto">
