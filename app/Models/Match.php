@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Collection;
 
 
 /**
@@ -34,10 +33,18 @@ class Match extends Model
         'is_done',
     ];
 
+    /**
+     * return a string of a match for easy display
+     */
     public function toString(){
         return  'user_id1 : '.$this->user_id1.' user_id2 : '.$this->user_id2.' status_user1 : '.$this->status_user1.' status_user2 : '.$this->status_user2.' is_done : '.$this->is_done;
     }
 
+
+    /**
+     * return all matchs in table for easy display
+     * param : a list of matchs
+     */
     public static function asHtmlTableRowAll($userMatchs){
         $colValidated=collect([]);
         $colPending=collect([]);
@@ -55,7 +62,6 @@ class Match extends Model
                         $colAborted->push($m);
                         break;       
                 }
-
             }
         }
         
@@ -116,6 +122,9 @@ class Match extends Model
         return implode('',$data->toArray());
     }
 
+    /**
+     * tool for display with color a single match
+     */
     public  function asHtmlTableRowColor($singleMatch,$colorId,$style){
         switch($colorId){
             case 0 :$color='#02b030';
@@ -147,12 +156,17 @@ class Match extends Model
                  </tr>';
      }
 
-    public function getUserNameTargetFromIdLogged($userId){
+    
+     public function getUserNameTargetFromIdLogged($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1)->name;
         if($userId==$this->user_id1)
             return User::getUserById($this->user_id2)->name;
     }
+
+    /**
+     * return the target of the current match - depending on the given user id
+     */
     public function getUserTargetFromIdLogged($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1);
@@ -160,10 +174,16 @@ class Match extends Model
             return User::getUserById($this->user_id2);
     }
 
+    /**
+     * return the boolean status of a match if it has to be displayed depending on the given user id
+     */
     public function toBeDisplayed($currentUserId){
         return(($currentUserId== $this->user_id1 && $this->status_user1 == true) || ( $currentUserId== $this->user_id2 && $this->status_user2 == true));
     }
 
+    /**
+     * return the target user id of current match depending on the given user id
+     */
     public function getTargetUserId($userId){
         if($userId==$this->user_id2)
             return $this->user_id1;
@@ -171,7 +191,10 @@ class Match extends Model
             return $this->user_id2;
     }
     
-    public function getTargetImage($userId){
+    /**
+     * return the target user of current match depending on the given user id
+     */
+    public function getTargetUser($userId){
         if($userId==$this->user_id2)
             return User::getUserById($this->user_id1);
         if($userId==$this->user_id1)
@@ -179,6 +202,10 @@ class Match extends Model
 
     }
 
+
+    /**
+     * return a string depending on the current match status
+     */
     public  function getMatchTextStatus(){
         if($this->status_user2==1 && $this->status_user1==1 && $this->is_done==1)
             return 'Match Validated';
@@ -187,6 +214,9 @@ class Match extends Model
         return 'Pending Match';
     } 
 
+    /**
+     * update function of the current match
+     */
     public function updateUnDislike(){
         if($this->user_id1==Auth::id()){
             $this->is_done=false;
@@ -200,8 +230,13 @@ class Match extends Model
         }
     }
 
-    //static
+    //
+    // static
+    //
 
+    /**
+     * return the match committing the two given users
+     */
     public static function getMatchBy2UsersId($id1,$id2){
         foreach(Match::allMatchs() as $m){
             if(($m->user_id1==$id1 && $m->user_id2==$id2 ) || ($m->user_id1==$id2 && $m->user_id2==$id1 ))
@@ -209,6 +244,9 @@ class Match extends Model
         }
     }
 
+    /**
+     * update the notification status depending on the given match id
+     */
     public static function updateNotif($matchId){
         $m=Match::getMatchById($matchId);
         if($m->user_id2 == Auth::id() && !$m->has_been_detail_id2){
@@ -220,7 +258,9 @@ class Match extends Model
         $m->save();
     }
 
-
+    /**
+     * function to update and existing match given with the given status
+     */
     public static function updateByLikeOrDislike($matchId,$status){
         $m=Match::getMatchById($matchId);
         if( $m->user_id1==Auth::id()){
@@ -234,6 +274,10 @@ class Match extends Model
         $m->save();
     }
 
+    
+    /**
+     * create and store a new match between a match id and a status (like or dislike)
+     */
     public static function createAndStore($newMatchUserId,$status){
         $newMatch=new Match();        
         $newMatch->user_id1=Auth::id();
@@ -245,6 +289,10 @@ class Match extends Model
         $newMatch->is_done=!$status;
         $newMatch->save();
     }
+
+    /**
+     * return a collection of output to display in view & prepare like/dislike
+     */
     public static function findATarget(){
         $id=Auth::id();
         $userMe=User::getUserById($id);
@@ -313,7 +361,7 @@ class Match extends Model
         $idToSend=null;
         $name=null;
         if($oneMatchToAnswer!=null){//cas match existant
-            $image=$oneMatchToAnswer->getTargetImage($id)->image!=null?$oneMatchToAnswer->getTargetImage($id)->image:'defaultUser.jpg';
+            $image=$oneMatchToAnswer->getTargetUser($id)->image!=null?$oneMatchToAnswer->getTargetUser($id)->image:'defaultUser.jpg';
             $idToSend=$oneMatchToAnswer->id;
             $name=Match::getMatchById($idToSend)->getUserNameTargetFromIdLogged($id);
         }
@@ -338,14 +386,24 @@ class Match extends Model
         return collect([$userMatchs,$idToSend,$newMatchUserId,$image,$name]);
     }
 
-
+    /**
+     * return all matches
+     */
     public static function allMatchs()
     {
         return Match::all();
     }  
+
+    /**
+     * return a match depending on the given id
+     */
     public static function getMatchById($id){
         return Match::find($id);
     }
+
+    /**
+     * return  all matches committing a given user by is id
+     */
     public static function getAllMatchByUser($userId){
         $allMatchs=Match::allMatchs();
         $stock=[];

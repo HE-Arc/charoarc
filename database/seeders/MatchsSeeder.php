@@ -10,7 +10,7 @@ class MatchsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * Seeder for Match model
      * @return void
      */
     public function run()

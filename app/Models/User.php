@@ -69,7 +69,7 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     /**
      * get user by id
-     * 
+     * return a user depend on his given id
      */
     public static function getUserById($id) {
         $user = User::find($id);
@@ -78,8 +78,9 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     /**
      * Tools
+     * return a collection of all
+     * users already dislike by loggen user.
      */
-
     public static function getDislikedUsers() {
         $id=Auth::id();
         $userMatchs=Match::getAllMatchByUser($id);
@@ -94,67 +95,90 @@ class User extends Authenticatable  implements MustVerifyEmail
             }
         }
         return $userDisliked;
-}
+    }
+
+
+    //
+    //update management
+    //
 
     /**
-     * UPDATER
+     * user name updater
      */
     public static function updateUserName($id, $name) {
         $user = User::find($id);
         $user->name=$name;
         $user->save();
     }
-
+    /**
+     * user email updater
+     */
     public static function updateUserEmail($id, $email) {
         $user = User::find($id);
         $user->email=$email;
         $user->email_verified_at=null;
         $user->save();
     }
-
+    /**
+     * user gender updater
+     */
     public static function updateUserGender($id, $gender) {
         $user = User::find($id);
         $user->gender=$gender;
         $user->save();
     }
-
+    /**
+     * user interest updater
+     */
     public static function updateUserInteressedBy($id, $interessedBy) {
         $user = User::find($id);
         $user->interessedBy=$interessedBy;
         $user->save();
     }
-
+    /**
+     * user birthday updater
+     */
     public static function updateUserBirthday($id, $birthday) {
         $user = User::find($id);
         $user->birthday=$birthday;
         $user->save();
     }
-
+    /**
+     * user description updater
+     */
     public static function updateUserDescription($id, $description) {
         $user = User::find($id);
         $user->description=($description);
         $user->save();
     }
-
+    /**
+     * user password updater
+     */
     public static function updateUserPassword($id, $password) {
         $user = User::find($id);
         $user->password=Hash::make($password);
         $user->save();
     } 
-
+    /**
+     * user image updater
+     */
     public static function updateUserImage($id, $image) {
         $user = User::find($id);
         $user->image=$image;
         $user->save();
     }
-
+    /**
+     * user phone updater
+     */
     public static function updatePhone($id,$phone) {
         $user = User::find($id);
         $user->phone=$phone;
         $user->save();
     }
+
     /**
      * getImage
+     * return the user's image if there's one
      */
     public function getImage() {
         if($this->image!=null)
@@ -163,19 +187,18 @@ class User extends Authenticatable  implements MustVerifyEmail
         return 'defaultUser.jpg';
     }
     
-    /**
-     * Age managment with Carbon
-     */
+
+    //
+    //Age management
+    //
     public static function getAge($age) {
         return Carbon::parse($age)->age;
     } 
-
     public static function getMinAge() {
         $mutable = Carbon::now();
         $mutable->sub(User::MIN_AGE, 'year');
         return $mutable->toDateString();
     }
-
     public static function getMaxAge() {
         $mutable = Carbon::now();
         $mutable->sub(User::MAX_AGE, 'year');
