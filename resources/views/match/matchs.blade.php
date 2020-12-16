@@ -35,7 +35,7 @@
                         </form>
                     </td>
                     <td  style="width:auto;height:35%;margin:0 auto;">
-                        <img class="rounded" src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
+                        <img class="rounded" style="width:auto;height:35%" src="{{__(asset( 'storage/'. $image))}}" alt="target image" >
                     </td>
                         <td >
                         <form method="POST" action="{{route('like')}}">
