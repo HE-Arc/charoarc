@@ -68,7 +68,7 @@
                 <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
                             <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
-                                <div class="p-6 bg-gray-200 border-b border-gray-200">
+                                <div class="p-6 bg-gray-200 " style="width: min-content;">
                                     <form  method="post" enctype="multipart/form-data" 
                                         action="{{ route('updateMe', ['id' => $user->id, 'Image' => $Image ?? ''])}}">
                                         @csrf
@@ -77,9 +77,9 @@
                                         <div style="display:flex; justify-content:space-around; text-align:center;margin:auto;"> 
                                             <div></div>
                                             @if(!empty($user->image))
-                                                <img src="{{ asset( 'storage/' . $user->image ) }}"  width="20%" height="auto">
+                                                <img src="{{ asset( 'storage/' . $user->image ) }}" style="width:40%;height:auto">
                                             @else
-                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" width="20%" height="auto">
+                                                <img src="{{ asset( 'storage/defaultUser.jpg') }}" style="width:40%;height:auto">
                                             @endif <div></div>
                                         </div>
                                         <x-input  type="file" id="Image" name="Image" />
