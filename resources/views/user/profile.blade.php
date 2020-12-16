@@ -105,6 +105,26 @@
                             </div>
                         </div>
                     </div>
+
+                                            <!-- Change Email -->
+                    <div class="py-3">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
+                            <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
+                                <div class="p-6 bg-gray-200 border-b border-gray-200">
+                                    <form  method="post" enctype="multipart/form-data" 
+                                        action="{{ route('updateMe', ['id' => $user->id, 'description' => $description ?? ''])}}">
+                                        @csrf
+                                        <x-label>Description</x-label>
+                                        <textarea id="description" name="description"   rows="5" cols="40">
+                                        {{__($user->description)}}
+                                        </textarea>
+                                        <br><x-button class="pt-5">Change</x-button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                                     <!-- change phone  -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
