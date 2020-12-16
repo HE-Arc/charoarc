@@ -120,6 +120,11 @@ class User extends Authenticatable  implements MustVerifyEmail
         $user->birthday=$birthday;
         $user->save();
     }
+    public static function updateUserDescription($id, $description){
+        $user = User::find($id);
+        $user->description=($description);
+        $user->save();
+    }
     public static function updateUserPassword($id, $password)
     {
         $user = User::find($id);

@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                                            <!-- Change Email -->
+                                            <!-- Change Description -->
                     <div class="py-3">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-6">
                             <div class="bg-gray-200 overflow-hidden shadow-md sm:rounded-lg">
@@ -115,8 +115,12 @@
                                         action="{{ route('updateMe', ['id' => $user->id, 'description' => $description ?? ''])}}">
                                         @csrf
                                         <x-label>Description</x-label>
-                                        <textarea id="description" name="description"   rows="5" cols="40">
-                                        {{__($user->description)}}
+                                        <textarea maxlength="140"  id="description" name="description"  rows="5" cols="28" required >
+                                            @if($user->description!=null)
+                                            {{__($user->description)}}
+                                            @else
+                                            {{__('Tell us about you..')}}
+                                            @endif
                                         </textarea>
                                         <br><x-button class="pt-5">Change</x-button>
                                     </form>
