@@ -6,9 +6,9 @@
     </x-slot>
     <x-slot name="slot"> 
     @if(Auth::check())
-        <table class="py-2 " style="display:flex;flex-wrap: wrap; justify-content:space-around;text-align:center;margin:auto; width:95%;margin-top: 5%; ">
-            <tr>   
-                    <td  style="width:50%;height:auto;margin:0 auto;">
+        <table class="py-1 " style="display:flex;flex-wrap: wrap; justify-content:space-around;text-align:center;margin:auto; width:95%;">
+            <tr >   
+                    <td  style="height:20em;width:20em; margin:0 auto;">
                         <img class="rounded"  src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="width: 100%;height: auto;">
                     </td>     
                     <td>
@@ -18,7 +18,7 @@
                     <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
                         Age : {{$age}}</td></tr>
                     <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
-                        <div style="text-align:center;width:fit-content; width:auto;" >Description : <br>{{$description}}</div>
+                        <div style="text-align:center;width:fit-content; width:auto;" >Description : <br><div style="word-wrap: break-word;">{{$description}}</div></div>
                     </td></tr>
                     <tr><td  style="text-align:center; width:45%;word-wrap: break-word; border-radius: 1em;" class="py-2 bg-gray-300 rounded">
                         Matched on : {{$date}}</td></tr>
