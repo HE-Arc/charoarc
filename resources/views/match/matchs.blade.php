@@ -23,7 +23,7 @@
      </div> <!-- end .flash-message -->
 
         <table class="py-2 " style="display:flex; justify-content:space-around;
-        text-align:center;margin:auto; width:95%; ">
+        text-align:center;margin:auto; width:95%;margin-top: 5%; ">
             <tr>
             @if($matchToAnswerId !=null || $newMatchUserId !=null)
                     <td>
@@ -34,7 +34,7 @@
                             <input type ="submit" value="Dislike" style=" float:left;background-color:red; border-radius: 9px;" ></input>
                         </form>
                     </td>
-                    <td  style="height:25em;width:25em;margin:0 auto;">
+                    <td  style="width:50%;height:auto;margin:0 auto;">
                         <img class="rounded"  src="{{__(asset( 'storage/'. $image))}}" alt="target image" style="width: 100%;height: auto;">
                     </td>
                         <td >
